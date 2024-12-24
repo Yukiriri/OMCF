@@ -26,8 +26,8 @@
 
 # 启动
 - ## 推荐JDK
-  - [Adoptium JDK](https://adoptium.net/zh-CN/temurin/releases/)
   - [Liberica JDK](https://bell-sw.com/pages/downloads/)
+  - [Adoptium JDK](https://adoptium.net/zh-CN/temurin/releases/)
   - [Zulu JDK](https://www.azul.com/downloads/?package=jdk#zulu)
 
 - ## 命令格式
@@ -45,14 +45,14 @@
       暂停时间基本上在3毫秒，GC负载高  
     - `gc21`  
       使用Java21开始可用的GC预设  
-      暂停时间基本上在0.1毫秒，GC负载只高了一些  
+      暂停时间基本上在0.1毫秒，GC负载不算很高  
     - `gc21c`  
       和上面的gc21相同  
       但以更高CPU占用把堆内存水位控制在最低  
   - `yggdrasil`：可选以下（区分大小写）：  
     - `ls`：修改yggdrasil为littleskin  
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > 1. 由于还没有编写系统版本判断，如果你有原因不能使用新版本系统，请手动把`GC`参数填写为`gc8`  
 > 2. 使用`yggdrasil`参数需要在上级目录放置`authlib-injector.jar`  
 
@@ -90,7 +90,7 @@
 cd OMCSL
 git pull
 ```
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > 在Windows平台需要把实例关闭后再更新，这个涉及到Windows的bat逆天读取机制  
 
 ## 学习参考

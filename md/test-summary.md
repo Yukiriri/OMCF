@@ -16,10 +16,10 @@ JDK：Liberica JDK 21
 - ### 16G
 ![](./img/gc8-16G.png)
 
-> [!NOTE]  
+> [!NOTE]
 > GC日志中平均暂停时间40ms  
 
-> [!TIP]  
+> [!TIP]
 > 如果在运行时出现连续频繁CPU尖峰，应该尝试给大点内存  
 
 # gc11表现
@@ -28,11 +28,12 @@ JDK：Liberica JDK 21
 - ### 16G
 ![](./img/gc11-16G.png)
 
-> [!NOTE]  
+> [!NOTE]
 > GC日志中平均暂停时间0.3ms  
 
-> [!NOTE]  
+> [!NOTE]
 > CPU尖峰是这个GC的设计特色，无解  
+> 属于给低版本MC实现低暂停的一种选择  
 
 # gc21表现
 - ### 6G
@@ -40,12 +41,12 @@ JDK：Liberica JDK 21
 - ### 16G
 ![](./img/gc21-16G.png)
 
-> [!NOTE]  
+> [!NOTE]
 > GC日志中平均暂停时间0.01ms  
 
 # gc21c表现
 - ### 16G
 ![](./img/gc21c-16G.png)
 
-> [!NOTE]  
+> [!NOTE]
 > 只在高内存分配中见效明显  
