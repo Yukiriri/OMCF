@@ -9,10 +9,7 @@
 
   -XX:+AlwaysPreTouch
   -XX:+DisableExplicitGC
-  -XX:MinMetaspaceFreeRatio=10
-  -XX:MaxMetaspaceFreeRatio=11
   -XX:MetaspaceSize=128M
-  -XX:InitialCodeCacheSize=128M
   -XX:ReservedCodeCacheSize=384M
 
   -XX:+UseG1GC
@@ -28,7 +25,7 @@
   ```
 - 方便命令行使用
   ```
-  -Dfile.encoding=UTF-8 -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MinMetaspaceFreeRatio=10 -XX:MaxMetaspaceFreeRatio=11 -XX:MetaspaceSize=128M -XX:InitialCodeCacheSize=128M -XX:ReservedCodeCacheSize=384M -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=100 -XX:G1HeapRegionSize=2M -XX:G1NewSizePercent=99 -XX:G1MaxNewSizePercent=99 -XX:+AlwaysTenure -XX:-G1UseAdaptiveIHOP -XX:InitiatingHeapOccupancyPercent=80 -XX:+ParallelRefProcEnabled
+  -Dfile.encoding=UTF-8 -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MetaspaceSize=128M -XX:ReservedCodeCacheSize=384M -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=100 -XX:G1HeapRegionSize=2M -XX:G1NewSizePercent=99 -XX:G1MaxNewSizePercent=99 -XX:+AlwaysTenure -XX:-G1UseAdaptiveIHOP -XX:InitiatingHeapOccupancyPercent=80 -XX:+ParallelRefProcEnabled
   ```
 - [运行效果](./md/test-summary-g1gc.md)
 - [参数讲解](./md/explain-g1gc.md)
@@ -40,10 +37,7 @@
 
   -XX:+AlwaysPreTouch
   -XX:+DisableExplicitGC
-  -XX:MinMetaspaceFreeRatio=10
-  -XX:MaxMetaspaceFreeRatio=11
   -XX:MetaspaceSize=128M
-  -XX:InitialCodeCacheSize=128M
   -XX:ReservedCodeCacheSize=384M
 
   -XX:-UseG1GC
@@ -53,7 +47,7 @@
   ```
 - 方便命令行使用
   ```
-  -Dfile.encoding=UTF-8 -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MinMetaspaceFreeRatio=10 -XX:MaxMetaspaceFreeRatio=11 -XX:MetaspaceSize=128M -XX:InitialCodeCacheSize=128M -XX:ReservedCodeCacheSize=384M -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive
+  -Dfile.encoding=UTF-8 -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MetaspaceSize=128M -XX:ReservedCodeCacheSize=384M -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive
   ```
 
 # ZGC - 客户端
@@ -72,7 +66,7 @@
 - ### 如果使用Java17+，还可以再添加`--add-modules=jdk.incubator.vector`
 
 # 关于bin目录脚本
-已化繁为简，可以继续使用，但不再维护
+已化繁为简，可以继续使用，但不再主力维护
 
 ## 推荐JDK
   - [Liberica](https://bell-sw.com/pages/downloads/)

@@ -50,10 +50,7 @@ if "%OMCSL_DEBUG%" == "" (
   set OMCSL_DEBUG=0
 )
 if %OMCSL_DEBUG% GEQ 2 if %JAVA_VER% GEQ 11 (
-  if not exist logs\gc mkdir logs\gc
-  if "%gc_policy:~0,3%" == "gc8"  set gc_log_type=gc,gc+phases,gc+marking
-  if "%gc_policy:~0,4%" == "gc21" set gc_log_type=gc+phases,gc+stats
-  set debug_opts=%debug_opts% -Xlog:!gc_log_type!:file="logs/gc/phases.log"::filecount=10
+  set debug_opts=%debug_opts% -XX:+PrintCodeCache -Xlog:gc,gc+metaspace:file="logs/gc.log"::filecount=10
 )
 if %OMCSL_DEBUG% GEQ 1 (
   echo --------------------------------------------------

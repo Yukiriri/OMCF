@@ -2,10 +2,7 @@
 
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
--XX:MinMetaspaceFreeRatio=10
--XX:MaxMetaspaceFreeRatio=11
 -XX:MetaspaceSize=128M
--XX:InitialCodeCacheSize=128M
 -XX:ReservedCodeCacheSize=384M
 
 -XX:+UseG1GC

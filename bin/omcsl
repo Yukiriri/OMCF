@@ -50,10 +50,7 @@ if [[ "$OMCSL_DEBUG" == "" ]]; then
   OMCSL_DEBUG=0
 fi
 if [[ $OMCSL_DEBUG -ge 2 && $JAVA_VER -ge 11 ]]; then
-  if [[ ! -d "logs/gc" ]]; then mkdir logs/gc; fi
-  if [[ "${gc_policy:0:3}" == "gc8" ]];  then gc_log_type="gc,gc+phases,gc+marking"; fi
-  if [[ "${gc_policy:0:4}" == "gc21" ]]; then gc_log_type="gc+phases,gc+stats"; fi
-  debug_opts+=" -Xlog:$gc_log_type:file="logs/gc/phases.log"::filecount=10"
+  debug_opts+=" -XX:+PrintCodeCache -Xlog:gc,gc+metaspace:file="logs/gc.log"::filecount=10"
 fi
 if [[ $OMCSL_DEBUG -ge 1 ]]; then
   echo --------------------------------------------------
