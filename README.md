@@ -1,107 +1,105 @@
-<div align="center">
-
-[![Banner](https://socialify.git.ci/Yukiriri/OMCSL/image?description=1&language=1&name=1&owner=1&pattern=Circuit%20Board&theme=Auto)]()
-
-[![Repo size](https://img.shields.io/github/repo-size/Yukiriri/OMCSL?style=for-the-badge)]()
-
-一个自动化选择MC通用优化的启动脚本，使用自适应公式根据可用资源计算低暂停与总负载的平衡点。  
+# OMCF
+吸收了各种MC调优后再进行重新定制的MC JVM参数，将同时研究服务端和客户端的方案。  
 如果遇到问题或者有更好的调优，欢迎提出。  
 
-</div>
-
-# 讲解汇总
-- [运行效果](./md/test-summary.md)
-- [对比Aikar's Flags](./md/aikar-g1gc.md)
-- [经验总结](./md/my-gc.md)
-
-# 计划功能
-- Linux脚本加入自动判断大页开关来启用透明大页
-
-# 安装
-1. 下载仓库
+# G1GC - 服务端
+- 方便写入文件使用
   ```
-  git clone -b stable https://github.com/Yukiriri/OMCSL.git
+  -Dfile.encoding=UTF-8
+
+  -XX:+AlwaysPreTouch
+  -XX:+DisableExplicitGC
+  -XX:MinMetaspaceFreeRatio=10
+  -XX:MaxMetaspaceFreeRatio=11
+  -XX:MetaspaceSize=128M
+  -XX:InitialCodeCacheSize=128M
+  -XX:ReservedCodeCacheSize=384M
+
+  -XX:+UseG1GC
+  -XX:+UnlockExperimentalVMOptions
+  -XX:MaxGCPauseMillis=100
+  -XX:G1HeapRegionSize=2M
+  -XX:G1NewSizePercent=99
+  -XX:G1MaxNewSizePercent=99
+  -XX:+AlwaysTenure
+  -XX:-G1UseAdaptiveIHOP
+  -XX:InitiatingHeapOccupancyPercent=80
+  -XX:+ParallelRefProcEnabled
   ```
-2. （可选）将仓库中bin目录添加到环境变量
+- 方便命令行使用
+  ```
+  -Dfile.encoding=UTF-8 -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MinMetaspaceFreeRatio=10 -XX:MaxMetaspaceFreeRatio=11 -XX:MetaspaceSize=128M -XX:InitialCodeCacheSize=128M -XX:ReservedCodeCacheSize=384M -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=100 -XX:G1HeapRegionSize=2M -XX:G1NewSizePercent=99 -XX:G1MaxNewSizePercent=99 -XX:+AlwaysTenure -XX:-G1UseAdaptiveIHOP -XX:InitiatingHeapOccupancyPercent=80 -XX:+ParallelRefProcEnabled
+  ```
+- [运行效果](./md/test-summary-g1gc.md)
+- [参数讲解](./md/explain-g1gc.md)
 
-# 启动
-- ## 推荐JDK
-  - [Liberica JDK](https://bell-sw.com/pages/downloads/)
-  - [Adoptium JDK](https://adoptium.net/zh-CN/temurin/releases/)
-  - [Zulu JDK](https://www.azul.com/downloads/?package=jdk#zulu)
+# ZGC - 服务端
+- 方便写入文件使用
+  ```
+  -Dfile.encoding=UTF-8
 
-- ## 命令格式
-  ### `omcsl` \<`core`\> \<`Xmx`\> [ \<`GC`\> [ `yggdrasil` ] ]
-  - `core`：服务端jar文件名 或者 MOD加载器的启动@txt
-  - `Xmx`：堆内存大小
-  - `GC`：可选以下（区分大小写）：
-    - `auto`  
-      使用脚本内的简单判断自动选择（默认）  
-    - `gc8`  
-      使用Java8开始可用的GC预设  
-      有一定的暂停时间，GC负载全程都比较低  
-    - `gc11`  
-      使用Java11开始可用的GC预设  
-      暂停时间基本上在3毫秒，GC负载高  
-    - `gc21`  
-      使用Java21开始可用的GC预设  
-      暂停时间基本上在0.1毫秒，GC负载不算很高  
-    - `gc21c`  
-      和上面的gc21相同  
-      但以更高CPU占用把堆内存水位控制在最低  
-  - `yggdrasil`：可选以下（区分大小写）：  
-    - `ls`：修改yggdrasil为littleskin  
+  -XX:+AlwaysPreTouch
+  -XX:+DisableExplicitGC
+  -XX:MinMetaspaceFreeRatio=10
+  -XX:MaxMetaspaceFreeRatio=11
+  -XX:MetaspaceSize=128M
+  -XX:InitialCodeCacheSize=128M
+  -XX:ReservedCodeCacheSize=384M
 
-> [!IMPORTANT]
-> 1. 由于还没有编写系统版本判断，如果你有原因不能使用新版本系统，请手动把`GC`参数填写为`gc8`  
-> 2. 使用`yggdrasil`参数需要在上级目录放置`authlib-injector.jar`  
+  -XX:-UseG1GC
+  -XX:+UseZGC
+  -XX:+ZGenerational
+  -XX:-ZProactive
+  ```
+- 方便命令行使用
+  ```
+  -Dfile.encoding=UTF-8 -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MinMetaspaceFreeRatio=10 -XX:MaxMetaspaceFreeRatio=11 -XX:MetaspaceSize=128M -XX:InitialCodeCacheSize=128M -XX:ReservedCodeCacheSize=384M -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive
+  ```
 
-- ## 命令样例
-  - 分配4G的堆，自动选择gc，不修改yggdrasil
-    ```
-    omcsl purpur.jar 4G
-    ```
-  - 分配4G的堆，选择gc8，不修改yggdrasil
-    ```
-    omcsl purpur.jar 4G gc8
-    ```
-  - 分配4G的堆，自动选择gc，修改yggdrasil为littleskin
-    ```
-    omcsl purpur.jar 4G auto ls
-    ```
-  - 分配4G的堆，选择gc8，修改yggdrasil为littleskin
-    ```
-    omcsl purpur.jar 4G gc8 ls
-    ```
-  - 使用环境变量
-    - Windows bat脚本
-      ```
-      set JAVA_BIN=C:\Java\bin\java
-      omcsl purpur.jar 4G
-      ```
-    - Linux shell脚本
-      ```
-      export JAVA_BIN=/opt/Java/bin/java
-      omcsl purpur.jar 4G
-      ```
+# ZGC - 客户端
+正在做
 
-# 更新
-```
-cd OMCSL
-git pull
-```
-> [!IMPORTANT]
-> 在Windows平台需要把实例关闭后再更新，这个涉及到Windows的bat逆天读取机制  
+# ZGC - 客户端内存紧凑模式
+正在做
+
+# 使用方式
+- ### 如果使用Java8，则只有一种方式
+  - 将JVM参数添加到启动命令行
+- ### 如果使用Java11+，则多一种方式
+  - 写入到文件里并在启动命令行引用
+    - 使用jar启动的核心适合写入自定义文件
+    - 高版本Mod Loader适合写入到`user_jvm_args.txt`
+- ### 如果使用Java17+，还可以再添加`--add-modules=jdk.incubator.vector`
+
+# 关于bin目录脚本
+已化繁为简，可以继续使用，但不再维护
+
+## 推荐JDK
+  - [Liberica](https://bell-sw.com/pages/downloads/)
+  - [Temurin](https://adoptium.net/zh-CN/temurin/releases/)
+  - [Zulu](https://www.azul.com/downloads/?package=jdk#zulu)
+
+## 一点MC内存经验
+MC一般值得计算的Java内存有
+  - 堆内存（Xmx）
+  - 非堆内存（Metaspace，Code Cache，...）
+  - 外界API管理的内存
+
+估算方式例如：
+  - 给服务端-Xmx4G，运行时候的占用大概是（堆4G + 非堆1G = 5G占用）
+  - 给客户端-Xmx4G，运行时候的占用大概是（堆4G + 非堆1G + OpenGL 2G = 7G占用）
+
+## TPS排查
+- 可以使用[spark](https://spark.lucko.me/download)采集并导出插件/MOD占用耗时堆栈图，找出tick占用高的堆栈顺序里最先出现的插件/模组
 
 ## 学习参考
 - [Aikar's Flags](https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft)
 - [VM Options Explorer](https://chriswhocodes.com/vm-options-explorer.html)
-- [https://pdai.tech/md/java/jvm/java-jvm-gc-g1.html](https://pdai.tech/md/java/jvm/java-jvm-gc-g1.html)
 - [ZGC OpenJDK Wiki](https://wiki.openjdk.org/display/zgc)
+- [https://pdai.tech/md/java/jvm/java-jvm-gc-g1.html](https://pdai.tech/md/java/jvm/java-jvm-gc-g1.html)
 
 ## Stargazers
 [![Stargazers](https://starchart.cc/Yukiriri/OMCSL.svg?variant=adaptive)](https://starchart.cc/Yukiriri/OMCSL)
 
 ## 无用的吐槽
-Java/JVM的发展理念就是让一切代码变得宝宝巴士，好处是少掉几根头发，坏处是所有瓶颈因此栽在这。  
-要不是因为MC，估计我这辈子也不会去深入Java这一遭（）  
+我现在已经不那么觉得JVM不行了，就是觉得MC需要一场真正的脱胎换骨

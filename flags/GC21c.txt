@@ -12,3 +12,8 @@
 -XX:+UseZGC
 -XX:+ZGenerational
 -XX:-ZProactive
+
+-XX:ZCollectionIntervalMinor=0.95
+-XX:ZUncommitDelay=5
+-XX:MinHeapFreeRatio=10
+-XX:MaxHeapFreeRatio=11
