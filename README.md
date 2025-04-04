@@ -104,7 +104,7 @@ MC一般值得计算的Java内存有
     对象的分配不再无脑向后开辟，所以内存开销可以尽可能最小化  
 
 ## Stargazers
-[![Stargazers](https://starchart.cc/Yukiriri/OMCSL.svg?variant=adaptive)](https://starchart.cc/Yukiriri/OMCSL)
+[![Stargazers](https://starchart.cc/Yukiriri/OMCF.svg?variant=adaptive)]()
 
 ## 无用的吐槽
 我现在已经不那么觉得JVM不行了，就是觉得MC需要一场真正的脱胎换骨
