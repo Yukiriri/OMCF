@@ -49,6 +49,8 @@
   ```
   -Dfile.encoding=UTF-8 -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MetaspaceSize=128M -XX:ReservedCodeCacheSize=384M -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive
   ```
+> [!IMPORTANT]
+> 需要Java21+
 
 # ZGC - 客户端
 正在做
@@ -91,6 +93,15 @@ MC一般值得计算的Java内存有
 - [VM Options Explorer](https://chriswhocodes.com/vm-options-explorer.html)
 - [ZGC OpenJDK Wiki](https://wiki.openjdk.org/display/zgc)
 - [https://pdai.tech/md/java/jvm/java-jvm-gc-g1.html](https://pdai.tech/md/java/jvm/java-jvm-gc-g1.html)
+
+## 经验总结
+- 关于2大GC  
+  - G1GC  
+    G1GC的设计理念是清大垃圾留小垃圾  
+    所以G1GC对垃圾的回收并不彻底，会有一些甚至明显的内存浪费  
+  - ZGC  
+    ZGC则是全新设计了内存分配和回收方式  
+    对象的分配不再无脑向后开辟，所以内存开销可以尽可能最小化  
 
 ## Stargazers
 [![Stargazers](https://starchart.cc/Yukiriri/OMCSL.svg?variant=adaptive)](https://starchart.cc/Yukiriri/OMCSL)
