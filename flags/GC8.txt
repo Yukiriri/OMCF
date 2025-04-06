@@ -2,8 +2,8 @@
 
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
--XX:MetaspaceSize=128M
--XX:ReservedCodeCacheSize=384M
+-XX:InitialCodeCacheSize=128M
+-XX:ReservedCodeCacheSize=256M
 
 -XX:+UseG1GC
 -XX:+UnlockExperimentalVMOptions
@@ -14,4 +14,5 @@
 -XX:+AlwaysTenure
 -XX:-G1UseAdaptiveIHOP
 -XX:InitiatingHeapOccupancyPercent=80
+-XX:G1MixedGCLiveThresholdPercent=90
 -XX:+ParallelRefProcEnabled

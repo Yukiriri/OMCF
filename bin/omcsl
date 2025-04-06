@@ -46,25 +46,23 @@ if [[ $JAVA_VER -ge 17 ]]; then
   JAVA_OPTS+=" --add-modules=jdk.incubator.vector"
 fi
 
-if [[ "$OMCSL_DEBUG" == "" ]]; then
-  OMCSL_DEBUG=0
-fi
-if [[ $OMCSL_DEBUG -ge 2 && $JAVA_VER -ge 11 ]]; then
-  debug_opts+=" -XX:+PrintCodeCache -Xlog:gc,gc+metaspace:file="logs/gc.log"::filecount=10"
-fi
-if [[ $OMCSL_DEBUG -ge 1 ]]; then
-  echo --------------------------------------------------
-  echo [OMCSL][DEBUG]: JAVA_BIN   = $JAVA_BIN
-  echo [OMCSL][DEBUG]: JAVA_VER   = $JAVA_VER
-  echo [OMCSL][DEBUG]: jar        = $1
-  echo [OMCSL][DEBUG]: Xmx        = $2
-  echo [OMCSL][DEBUG]: JAVA_OPTS  = $JAVA_OPTS
-  echo [OMCSL][DEBUG]: debug_opts = $debug_opts
-  echo --------------------------------------------------
-  $JAVA_BIN -Xmx$2 $JAVA_OPTS -XX:+PrintFlagsFinal 2>/dev/null | grep "command line"
-  echo --------------------------------------------------
-fi
-
 boot_core="$1"
 if [[ "${boot_core:0-3}" == "jar" ]]; then boot_core="-jar $boot_core"; fi
-$JAVA_BIN -Xms$2 -Xmx$2 $JAVA_OPTS $debug_opts $boot_core --nogui
+
+echo --------------------------------------------------
+echo [OMCSL][DEBUG]: JAVA_BIN   = $JAVA_BIN
+echo [OMCSL][DEBUG]: JAVA_VER   = $JAVA_VER
+echo [OMCSL][DEBUG]: jar        = $1
+echo [OMCSL][DEBUG]: Xmx        = $2
+echo [OMCSL][DEBUG]: JAVA_OPTS  = $JAVA_OPTS
+echo [OMCSL][DEBUG]: boot_core  = $boot_core
+echo --------------------------------------------------
+$JAVA_BIN -Xmx$2 $JAVA_OPTS -XX:+PrintFlagsFinal 2>/dev/null | grep "command line"
+echo --------------------------------------------------
+if [[ $JAVA_VER -ge 11 ]]; then
+  JAVA_OPTS+=" -Xlog:gc:file="logs/gc-heap.log"::filecount=0"
+  JAVA_OPTS+=" -Xlog:gc+metaspace:file="logs/gc-metaspace.log"::filecount=0"
+  JAVA_OPTS+=" -Xlog:codecache:file="logs/gc-codecache.log"::filecount=0"
+fi
+
+$JAVA_BIN -Xms$2 -Xmx$2 $JAVA_OPTS $boot_core --nogui

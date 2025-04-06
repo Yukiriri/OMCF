@@ -46,25 +46,23 @@ if %JAVA_VER% GEQ 17 (
   set JAVA_OPTS=%JAVA_OPTS% --add-modules=jdk.incubator.vector
 )
 
-if "%OMCSL_DEBUG%" == "" (
-  set OMCSL_DEBUG=0
-)
-if %OMCSL_DEBUG% GEQ 2 if %JAVA_VER% GEQ 11 (
-  set debug_opts=%debug_opts% -XX:+PrintCodeCache -Xlog:gc,gc+metaspace:file="logs/gc.log"::filecount=10
-)
-if %OMCSL_DEBUG% GEQ 1 (
-  echo --------------------------------------------------
-  echo [OMCSL][DEBUG]: JAVA_BIN   = %JAVA_BIN%
-  echo [OMCSL][DEBUG]: JAVA_VER   = %JAVA_VER%
-  echo [OMCSL][DEBUG]: jar        = %1
-  echo [OMCSL][DEBUG]: Xmx        = %2
-  echo [OMCSL][DEBUG]: JAVA_OPTS  = %JAVA_OPTS%
-  echo [OMCSL][DEBUG]: debug_opts = %debug_opts%
-  echo --------------------------------------------------
-  %JAVA_BIN% -Xmx%2 %JAVA_OPTS% -XX:+PrintFlagsFinal 2>nul | findstr /C:"command line"
-  echo --------------------------------------------------
-)
-
 set boot_core=%1
 if "%boot_core:~-3%" == "jar" set boot_core=-jar %boot_core%
-%JAVA_BIN% -Xms%2 -Xmx%2 %JAVA_OPTS% %debug_opts% %boot_core% --nogui
+
+echo --------------------------------------------------
+echo [OMCSL][DEBUG]: JAVA_BIN   = %JAVA_BIN%
+echo [OMCSL][DEBUG]: JAVA_VER   = %JAVA_VER%
+echo [OMCSL][DEBUG]: jar        = %1
+echo [OMCSL][DEBUG]: Xmx        = %2
+echo [OMCSL][DEBUG]: JAVA_OPTS  = %JAVA_OPTS%
+echo [OMCSL][DEBUG]: boot_core  = %boot_core%
+echo --------------------------------------------------
+%JAVA_BIN% -Xmx%2 %JAVA_OPTS% -XX:+PrintFlagsFinal 2>nul | findstr /C:"command line"
+echo --------------------------------------------------
+if %JAVA_VER% GEQ 11 (
+  set JAVA_OPTS=!JAVA_OPTS! -Xlog:gc:file="logs/gc-heap.log"::filecount=0
+  set JAVA_OPTS=!JAVA_OPTS! -Xlog:gc+metaspace:file="logs/gc-metaspace.log"::filecount=0
+  set JAVA_OPTS=!JAVA_OPTS! -Xlog:codecache:file="logs/gc-codecache.log"::filecount=0
+)
+
+%JAVA_BIN% -Xms%2 -Xmx%2 %JAVA_OPTS% %boot_core% --nogui
