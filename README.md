@@ -71,13 +71,13 @@
   - 写入到文件里并在启动命令行引用
     - 使用jar启动的核心适合写入自定义文件
     - 高版本纯Mod Loader适合写入到`user_jvm_args.txt`
-  > [!NOTE]
-  > 你是说，怎么在命令行引用？  
-  > 比如在`my_args.txt`里填写好了上面的参数  
-  > 然后启动命令就这样写  
-  > ```
-  > java @my_args.txt -jar server.jar
-  > ```
+> [!NOTE]
+> 你是说，怎么在命令行引用？  
+> 比如在`my_args.txt`里填写好了上面的参数  
+> 然后启动命令就这样写  
+> ```
+> java @my_args.txt -jar server.jar
+> ```
 - ### 如果使用Java17+，还可以再添加`--add-modules=jdk.incubator.vector`
 - ### 如果使用超大型整合包，把`-XX:ReservedCodeCacheSize`调大点，最大就到1G就好
 
