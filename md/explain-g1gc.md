@@ -6,8 +6,8 @@
   降低Region大小可以略微减少连续空间不足的风险，但会稀释G1MixedGCLiveThresholdPercent的效果  
   反之亦然  
 
-- ## -XX:G1NewSizePercent=99 -XX:G1MaxNewSizePercent=99
-  使年轻代大小用满全堆，也就是除年老代以外皆为年轻代
+- ## -XX:G1NewSizePercent=100 -XX:G1MaxNewSizePercent=100
+  将全堆中所有空闲空间给年轻代使用，也就是年老代以外皆为年轻代
 
 - ## -XX:+AlwaysTenure
   完全取消幸存区，年轻代回收后存活对象直接归为年老代  
