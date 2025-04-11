@@ -59,7 +59,7 @@ echo [OMCSL][DEBUG]: boot_core  = %boot_core%
 echo --------------------------------------------------
 %JAVA_BIN% -Xmx%2 %JAVA_OPTS% -XX:+PrintFlagsFinal 2>nul | findstr /C:"command line"
 echo --------------------------------------------------
-if %JAVA_VER% GEQ 11 (
+if exist "logs" if %JAVA_VER% GEQ 11 (
   set JAVA_OPTS=!JAVA_OPTS! -Xlog:gc:file="logs/gc-heap.log"::filecount=0
   set JAVA_OPTS=!JAVA_OPTS! -Xlog:gc+metaspace:file="logs/gc-metaspace.log"::filecount=0
   set JAVA_OPTS=!JAVA_OPTS! -Xlog:codecache:file="logs/gc-codecache.log"::filecount=0
