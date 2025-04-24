@@ -1,0 +1,14 @@
+-XX:+IgnoreUnrecognizedVMOptions
+-XX:+UnlockExperimentalVMOptions
+-Dfile.encoding=UTF-8
+
+-XX:+AlwaysPreTouch
+-XX:+DisableExplicitGC
+-XX:-UseCompressedClassPointers
+
+-XX:-UseG1GC
+-XX:+UseZGC
+-XX:+ZGenerational
+-XX:-ZProactive
+
+--add-modules=jdk.incubator.vector

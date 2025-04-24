@@ -1,14 +1,16 @@
+-XX:+IgnoreUnrecognizedVMOptions
+-XX:+UnlockExperimentalVMOptions
 -Dfile.encoding=UTF-8
 
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
--XX:InitialCodeCacheSize=128M
--XX:ReservedCodeCacheSize=256M
+-XX:-UseCompressedClassPointers
 
 -XX:-UseG1GC
 -XX:+UseZGC
 -XX:+ZGenerational
 -XX:-ZProactive
-
 -XX:ZCollectionIntervalMinor=0.95
 -XX:ZUncommitDelay=5
+
+--add-modules=jdk.incubator.vector
