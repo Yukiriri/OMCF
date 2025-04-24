@@ -1,0 +1,6 @@
+#!/bin/bash
+#cmd arg: <jar> <Xmx> [GC]
+#env arg: [JAVA_BIN]
+
+export OMCSL_DEBUG=1
+$(cd $(dirname ${BASH_SOURCE[0]}); pwd)/omcsl $*

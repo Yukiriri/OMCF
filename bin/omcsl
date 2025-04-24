@@ -1,5 +1,5 @@
 #!/bin/bash
-#cmd arg: <jar> <Xmx> <GC> [yggdrasil]
+#cmd arg: <jar> <Xmx> [GC]
 #env arg: [JAVA_BIN]
 
 shell_dir=$(cd $(dirname ${BASH_SOURCE[0]}); pwd)
@@ -7,39 +7,27 @@ if [[ "$JAVA_BIN" == "" ]]; then
   JAVA_BIN=java
 fi
 
-if [[ "$JAVA_VER" == "" ]]; then 
-  v=$($JAVA_BIN -version 2>&1 | grep "build")
-  if [[ $(echo $v | grep "build 21") != "" ]]; then JAVA_VER=21; fi
-  if [[ $(echo $v | grep "build 17") != "" ]]; then JAVA_VER=17; fi
-  if [[ $(echo $v | grep "build 11") != "" ]]; then JAVA_VER=11; fi
-  if [[ $(echo $v | grep "build 1.8") != "" ]]; then JAVA_VER=8; fi
-fi
+java_v=$($JAVA_BIN -version 2>&1 | grep "build")
+if [[ $(echo $java_v | grep "build 21") != "" ]];  then JAVA_VER=21; fi
+if [[ $(echo $java_v | grep "build 17") != "" ]];  then JAVA_VER=17; fi
+if [[ $(echo $java_v | grep "build 11") != "" ]];  then JAVA_VER=11; fi
+if [[ $(echo $java_v | grep "build 1.8") != "" ]]; then JAVA_VER=8;  fi
 
 if [[ "$JAVA_VER" == "" ]]; then
-  echo [OMCSL][ERROR]: JAVA_BIN error
-  exit
+  JAVA_VER=8
 fi
 
 gc_policy=$3
-if [[ "$gc_policy" == "" ]]; then gc_policy="gc8"; fi
-if [[ "${gc_policy:0:3}" == "gc8" ]]; then
-  gc_flags=$shell_dir/../flags/GC8.txt
-fi
-if [[ "${gc_policy:0:4}" == "gc21" ]]; then
-  gc_flags=$shell_dir/../flags/GC21.txt
-fi
-if [[ "${gc_policy:0:5}" == "gc21c" ]]; then
-  gc_flags=$shell_dir/../flags/GC21c.txt
-fi
+if [[ "$gc_policy" == "" ]];      then gc_policy="G1GC"; fi
+if [[ "$gc_policy" == "gc8" ]];   then gc_policy="G1GC"; fi
+if [[ "$gc_policy" == "gc21" ]];  then gc_policy="ZGC";  fi
+if [[ "$gc_policy" == "gc21c" ]]; then gc_policy="ZGCC"; fi
+gc_flags=$shell_dir/../flags/$gc_policy.txt
 
-if [[ "$4" == "ls" ]]; then yggdrasil_flags=$shell_dir/../flags/yggdrasil-littleskin.txt; fi
-
-if [[ $JAVA_VER -ge 9 ]]; then
-  if [[ "$yggdrasil_flags" != "" ]]; then yggdrasil_flags="@$yggdrasil_flags"; fi
-  JAVA_OPTS="@$gc_flags $JAVA_OPTS $yggdrasil_flags"
+if [[ $JAVA_VER -eq 8 ]]; then
+  JAVA_OPTS+=" $(<$gc_flags)"
 else
-  if [[ "$yggdrasil_flags" == "" ]]; then yggdrasil_flags="/dev/null"; fi
-  JAVA_OPTS="$(<$gc_flags) $JAVA_OPTS $(<$yggdrasil_flags)"
+  JAVA_OPTS+=" @$gc_flags"
 fi
 
 if [[ $JAVA_VER -ge 17 ]]; then
@@ -49,20 +37,19 @@ fi
 boot_core="$1"
 if [[ "${boot_core:0-3}" == "jar" ]]; then boot_core="-jar $boot_core"; fi
 
-echo --------------------------------------------------
-echo [OMCSL][DEBUG]: JAVA_BIN   = $JAVA_BIN
-echo [OMCSL][DEBUG]: JAVA_VER   = $JAVA_VER
-echo [OMCSL][DEBUG]: jar        = $1
-echo [OMCSL][DEBUG]: Xmx        = $2
-echo [OMCSL][DEBUG]: JAVA_OPTS  = $JAVA_OPTS
-echo [OMCSL][DEBUG]: boot_core  = $boot_core
-echo --------------------------------------------------
-$JAVA_BIN -Xmx$2 $JAVA_OPTS -XX:+PrintFlagsFinal 2>/dev/null | grep "command line"
-echo --------------------------------------------------
-if [[ -d "logs" && $JAVA_VER -ge 11 ]]; then
-  JAVA_OPTS+=" -Xlog:gc:file="logs/gc-heap.log"::filecount=0"
-  JAVA_OPTS+=" -Xlog:gc+metaspace:file="logs/gc-metaspace.log"::filecount=0"
-  JAVA_OPTS+=" -Xlog:codecache:file="logs/gc-codecache.log"::filecount=0"
+if [[ "$OMCSL_DEBUG" == "1" ]]; then
+  if [[ -d "logs" && $JAVA_VER -ge 11 ]]; then
+    JAVA_OPTS+=" @$shell_dir/../flags/xlog-gc.txt"
+  fi
+  echo --------------------------------------------------
+  echo [OMCSL][DEBUG]: JAVA_BIN   = $JAVA_BIN
+  echo [OMCSL][DEBUG]: JAVA_VER   = $JAVA_VER
+  echo [OMCSL][DEBUG]: Xmx        = $2
+  echo [OMCSL][DEBUG]: JAVA_OPTS  = $JAVA_OPTS
+  echo [OMCSL][DEBUG]: boot_core  = $boot_core
+  echo --------------------------------------------------
+  $JAVA_BIN -Xmx$2 $JAVA_OPTS -XX:+PrintFlagsFinal 2>/dev/null | grep "command line"
+  echo --------------------------------------------------
 fi
 
 $JAVA_BIN -Xms$2 -Xmx$2 $JAVA_OPTS $boot_core --nogui
