@@ -37,7 +37,7 @@
 
 > [!TIP]
 > 如果使用Java17+  
-> 还可以再添加`--add-modules=jdk.incubator.vector`  
+> 还可以再添加`--add-modules jdk.incubator.vector`  
 
 # ZGC
 - 方便写入文件使用
@@ -55,12 +55,12 @@
 -XX:+ZGenerational
 -XX:-ZProactive
 
---add-modules=jdk.incubator.vector
+--add-modules jdk.incubator.vector
 
 ```
 - 方便命令行使用
 ```
--XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:-UseCompressedClassPointers  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive  --add-modules=jdk.incubator.vector 
+-XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:-UseCompressedClassPointers  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive  --add-modules jdk.incubator.vector 
 ```
 
 > [!NOTE]
@@ -90,12 +90,12 @@
 -XX:ZCollectionIntervalMinor=0.95
 -XX:ZUncommitDelay=5
 
---add-modules=jdk.incubator.vector
+--add-modules jdk.incubator.vector
 
 ```
 - 方便命令行使用
 ```
--XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:-UseCompressedClassPointers  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive -XX:ZCollectionIntervalMinor=0.95 -XX:ZUncommitDelay=5  --add-modules=jdk.incubator.vector 
+-XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:-UseCompressedClassPointers  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive -XX:ZCollectionIntervalMinor=0.95 -XX:ZUncommitDelay=5  --add-modules jdk.incubator.vector 
 ```
 
 > [!NOTE]
@@ -118,6 +118,10 @@
 > ```
 > java @my_args.txt -jar server.jar
 > ```
+
+> [!NOTE]
+> 客户端添加到启动器自定义命令行  
+> 需要注意删除启动器已有的-XX:+UseG1GC  
 
 # bin目录脚本
 - [使用文档](./md/omcsl.md)
