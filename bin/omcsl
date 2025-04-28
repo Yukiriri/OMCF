@@ -31,7 +31,7 @@ else
 fi
 
 if [[ $JAVA_VER -ge 17 ]]; then
-  JAVA_OPTS+=" --add-modules=jdk.incubator.vector"
+  JAVA_OPTS+=" --add-modules jdk.incubator.vector"
 fi
 
 boot_core="$1"

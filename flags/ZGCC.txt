@@ -13,4 +13,4 @@
 -XX:ZCollectionIntervalMinor=0.95
 -XX:ZUncommitDelay=5
 
---add-modules=jdk.incubator.vector
+--add-modules jdk.incubator.vector

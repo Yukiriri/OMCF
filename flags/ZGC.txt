@@ -11,4 +11,4 @@
 -XX:+ZGenerational
 -XX:-ZProactive
 
---add-modules=jdk.incubator.vector
+--add-modules jdk.incubator.vector

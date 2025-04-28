@@ -31,7 +31,7 @@ if %JAVA_VER% EQU 8 (
 )
 
 if %JAVA_VER% GEQ 17 (
-  set JAVA_OPTS=%JAVA_OPTS% --add-modules=jdk.incubator.vector
+  set JAVA_OPTS=%JAVA_OPTS% --add-modules jdk.incubator.vector
 )
 
 set boot_core=%1
