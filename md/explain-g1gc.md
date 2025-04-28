@@ -24,10 +24,7 @@
 - ## -XX:G1MixedGCLiveThresholdPercent=95
   年老代Region中需要超过5%垃圾才会回收，按照4M的Region，也就是至少达到200K  
   按宏观来算，代表每1G年老代空间里最大容许50M垃圾  
-
-- ## -XX:G1HeapWastePercent=5
-  每次Mixed GC至少要能回收全堆5%大小的空间才会继续GC  
-  和G1MixedGCLiveThresholdPercent保持互补差距可以达到微妙效果  
+  和G1HeapWastePercent保持互补差距可以达到微妙效果  
 
 - ## -XX:+ParallelRefProcEnabled
   Java8没有对这个选项默认启用，所以才加上这个选项  

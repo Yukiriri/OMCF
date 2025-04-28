@@ -22,13 +22,12 @@
 -XX:-G1UseAdaptiveIHOP
 -XX:InitiatingHeapOccupancyPercent=80
 -XX:G1MixedGCLiveThresholdPercent=95
--XX:G1HeapWastePercent=5
 -XX:+ParallelRefProcEnabled
 
 ```
 - 方便命令行使用
 ```
--XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:-UseCompressedClassPointers  -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:G1HeapRegionSize=4M -XX:G1NewSizePercent=100 -XX:G1MaxNewSizePercent=100 -XX:+AlwaysTenure -XX:-G1UseAdaptiveIHOP -XX:InitiatingHeapOccupancyPercent=80 -XX:G1MixedGCLiveThresholdPercent=95 -XX:G1HeapWastePercent=5 -XX:+ParallelRefProcEnabled 
+-XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:-UseCompressedClassPointers  -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:G1HeapRegionSize=4M -XX:G1NewSizePercent=100 -XX:G1MaxNewSizePercent=100 -XX:+AlwaysTenure -XX:-G1UseAdaptiveIHOP -XX:InitiatingHeapOccupancyPercent=80 -XX:G1MixedGCLiveThresholdPercent=95 -XX:+ParallelRefProcEnabled 
 ```
 - [运行效果](./md/test-summary-g1gc.md)
 - [参数讲解](./md/explain-g1gc.md)
