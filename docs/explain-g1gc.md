@@ -22,7 +22,7 @@
   越高越能最大化减少Mixed GC的开销，但不能太高，太高了就Evacuation Failed触发Full GC了  
 
 - ## -XX:G1MixedGCLiveThresholdPercent=95
-  年老代Region中需要超过5%垃圾才会回收，按照4M的Region，也就是至少达到200K  
+  年老代Region中需要超过5%垃圾才会回收  
   按宏观来算，代表每1G年老代空间里最大容许50M垃圾  
   和G1HeapWastePercent保持互补差距可以达到微妙效果  
 

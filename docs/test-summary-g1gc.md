@@ -20,8 +20,8 @@
     | 6G       | 30%         | 131      | 4.0s     | 30ms       |
     | 12G      | 25%         | 82       | 3.2s     | 39ms       |
 
-![](./img/default-6G-131gc-4.0s.png)
-![](./img/default-12G-82gc-3.2s.png)
+![](./test-summary-g1gc/default-6G.png)
+![](./test-summary-g1gc/default-12G.png)
 
 - Aikar's Flags
     | 分配内存 | CPU曲线趋势 | GC总次数 | GC总时间 | GC平均时间 |
@@ -29,8 +29,8 @@
     | 6G       | 30%         | 192      | 4.0s     | 20ms       |
     | 12G      | 20%         | 76       | 2.0s     | 26ms       |
 
-![](./img/aikar-6G-192gc-4.0s.png)
-![](./img/aikar-12G-76gc-2.0s.png)
+![](./test-summary-g1gc/aikar-6G.png)
+![](./test-summary-g1gc/aikar-12G.png)
 
 - 我的GC
     | 分配内存 | CPU曲线趋势 | GC总次数 | GC总时间 | GC平均时间 |
@@ -38,5 +38,5 @@
     | 6G       | 20%         | 217      | 3.8s     | 17ms       |
     | 12G      | 20%         | 75       | 2.0s     | 26ms       |
 
-![](./img/my-6G-217gc-3.8s.png)
-![](./img/my-12G-75gc-2.0s.png)
+![](./test-summary-g1gc/my-6G.png)
+![](./test-summary-g1gc/my-12G.png)

@@ -12,6 +12,7 @@
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
 -XX:-UseCompressedClassPointers
+-XX:MaxDirectMemorySize=1024G
 
 -XX:+UseG1GC
 -XX:MaxGCPauseMillis=100
@@ -27,13 +28,13 @@
 ```
 - 方便命令行使用
 ```
--XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:-UseCompressedClassPointers  -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:G1HeapRegionSize=4M -XX:G1NewSizePercent=100 -XX:G1MaxNewSizePercent=100 -XX:+AlwaysTenure -XX:-G1UseAdaptiveIHOP -XX:InitiatingHeapOccupancyPercent=80 -XX:G1MixedGCLiveThresholdPercent=95 -XX:+ParallelRefProcEnabled 
+-XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:-UseCompressedClassPointers -XX:MaxDirectMemorySize=1024G  -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:G1HeapRegionSize=4M -XX:G1NewSizePercent=100 -XX:G1MaxNewSizePercent=100 -XX:+AlwaysTenure -XX:-G1UseAdaptiveIHOP -XX:InitiatingHeapOccupancyPercent=80 -XX:G1MixedGCLiveThresholdPercent=95 -XX:+ParallelRefProcEnabled 
 ```
-- [运行效果](./md/test-summary-g1gc.md)
-- [参数讲解](./md/explain-g1gc.md)
+- [运行效果](./test-summary-g1gc.md)
+- [参数讲解](./explain-g1gc.md)
 
 > [!NOTE]
-> 服务端客户端通用
+> 服务端、客户端、Velocity通用
 
 > [!TIP]
 > 如果使用Java17+  
@@ -49,6 +50,7 @@
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
 -XX:-UseCompressedClassPointers
+-XX:MaxDirectMemorySize=1024G
 
 -XX:-UseG1GC
 -XX:+UseZGC
@@ -60,11 +62,11 @@
 ```
 - 方便命令行使用
 ```
--XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:-UseCompressedClassPointers  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive  --add-modules jdk.incubator.vector 
+-XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:-UseCompressedClassPointers -XX:MaxDirectMemorySize=1024G  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive  --add-modules jdk.incubator.vector 
 ```
 
 > [!NOTE]
-> 服务端客户端通用
+> 服务端、客户端、Velocity通用
 
 > [!IMPORTANT]
 > 需要Java21+
@@ -82,35 +84,41 @@
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
 -XX:-UseCompressedClassPointers
+-XX:MaxDirectMemorySize=1024G
 
 -XX:-UseG1GC
 -XX:+UseZGC
 -XX:+ZGenerational
 -XX:-ZProactive
 -XX:ZCollectionIntervalMinor=0.95
--XX:ZUncommitDelay=5
+-XX:ZUncommitDelay=2
 
 --add-modules jdk.incubator.vector
 
 ```
 - 方便命令行使用
 ```
--XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:-UseCompressedClassPointers  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive -XX:ZCollectionIntervalMinor=0.95 -XX:ZUncommitDelay=5  --add-modules jdk.incubator.vector 
+-XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:-UseCompressedClassPointers -XX:MaxDirectMemorySize=1024G  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive -XX:ZCollectionIntervalMinor=0.95 -XX:ZUncommitDelay=2  --add-modules jdk.incubator.vector 
 ```
 
 > [!NOTE]
-> 服务端客户端通用
+> 服务端、客户端、Velocity通用，但最适合客户端
 
 > [!IMPORTANT]
 > 需要Java21+
 
 # 使用方式
-- ### 如果使用Java8，则只有一种方式
-  - 将JVM参数添加到启动命令行
-- ### 如果使用Java9+，则多一种方式
-  - 写入到文件里并在启动命令行引用
-    - 使用jar启动的核心适合写入自定义文件
-    - 高版本纯Mod Loader适合写入到`user_jvm_args.txt`
+- 服务端
+  - ### 如果使用Java8，则只有一种方式
+    - 将JVM参数添加到启动命令行
+  - ### 如果使用Java9+，则多一种方式
+    - 写入到文件里并在启动命令行引用
+      - 使用jar启动的核心适合写入自定义文件
+      - 高版本纯ModLoader适合写入到`user_jvm_args.txt`
+- 客户端  
+  添加到启动器自定义JVM参数  
+  需要注意删除启动器已有的`-XX:+UseG1GC`  
+
 > [!NOTE]
 > 你是说，怎么在启动命令行引用？  
 > 比如在`my_args.txt`里填写好了上面的参数  
@@ -119,12 +127,8 @@
 > java @my_args.txt -jar server.jar
 > ```
 
-> [!NOTE]
-> 客户端添加到启动器自定义命令行  
-> 需要注意删除启动器已有的-XX:+UseG1GC  
-
 # bin目录脚本
-- [使用文档](./md/omcsl.md)
+- [使用文档](./omcsl.md)
 
 ## 推荐JDK
   - [Liberica](https://bell-sw.com/pages/downloads/)
@@ -138,17 +142,15 @@ MC一般值得计算的Java内存有
   - 外界API管理的内存
 
 估算方式例如：
-  - 给服务端-Xmx4G，运行时候的占用大概是（堆4G + 非堆1G = 5G占用）
-  - 给客户端-Xmx4G，运行时候的占用大概是（堆4G + 非堆1G + OpenGL 2G = 7G占用）
+  - 给服务端-Xmx4G，运行期占用大概是（堆4G + 非堆1G = 5G占用）
+  - 给客户端-Xmx4G，运行期占用大概是（堆4G + 非堆1G + OpenGL 2G = 7G占用）
 
-## TPS排查
-> [!NOTE]
-> 可以使用[spark](https://spark.lucko.me/download)采集并导出插件/模组占用耗时堆栈图  
-> 找出堆栈顺序里最先出现的tick占用高的插件/模组  
+## 一点TPS排查经验
+- 可以使用[`spark`](https://spark.lucko.me/download)采集并导出插件/模组占用耗时堆栈图  
+  找出堆栈顺序里最先出现的tick占用高的插件/模组  
 
-> [!TIP]
-> 如果想安装`C2ME`模组  
-> 分配的内存不能太小，必须和CPU核心数成正比  
+- 如果想安装`C2ME`模组  
+  分配的内存不能太小，必须和CPU核心数成正比  
 
 ## 学习参考
 - [Aikar's Flags](https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft)
