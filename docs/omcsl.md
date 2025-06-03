@@ -1,7 +1,7 @@
 # 命令格式
 omcsl \<jar\> \<Xmx\> \[GC\]
 - jar  
-  jar核心或者@/libraries/....txt
+  `xxx.jar`或者`@/libraries/.../xxx.txt`
 - Xmx  
   分配多大的内存
 - GC  
