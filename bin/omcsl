@@ -19,9 +19,6 @@ fi
 
 gc_policy=$3
 if [[ "$gc_policy" == "" ]];      then gc_policy="G1GC"; fi
-if [[ "$gc_policy" == "gc8" ]];   then gc_policy="G1GC"; fi
-if [[ "$gc_policy" == "gc21" ]];  then gc_policy="ZGC";  fi
-if [[ "$gc_policy" == "gc21c" ]]; then gc_policy="ZGCC"; fi
 gc_flags=$shell_dir/../flags/$gc_policy.txt
 
 if [[ $JAVA_VER -eq 8 ]]; then
@@ -39,7 +36,7 @@ if [[ "${boot_core:0-3}" == "jar" ]]; then boot_core="-jar $boot_core"; fi
 
 if [[ "$OMCSL_DEBUG" == "1" ]]; then
   if [[ -d "logs" && $JAVA_VER -ge 11 ]]; then
-    JAVA_OPTS+=" @$shell_dir/../flags/xlog-gc.txt"
+    JAVA_OPTS+=" @$shell_dir/../flags/GC-xlog.txt"
   fi
   echo --------------------------------------------------
   echo [OMCSL][DEBUG]: JAVA_BIN   = $JAVA_BIN

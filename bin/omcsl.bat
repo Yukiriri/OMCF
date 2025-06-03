@@ -19,9 +19,6 @@ if "%JAVA_VER%" == "" (
 
 set gc_policy=%3
 if "%gc_policy%" == ""      set gc_policy=G1GC
-if "%gc_policy%" == "gc8"   set gc_policy=G1GC
-if "%gc_policy%" == "gc21"  set gc_policy=ZGC
-if "%gc_policy%" == "gc21c" set gc_policy=ZGCC
 set gc_flags=%~dp0\..\flags\%gc_policy%.txt
 
 if %JAVA_VER% EQU 8 (
@@ -39,7 +36,7 @@ if "%boot_core:~-3%" == "jar" set boot_core=-jar %boot_core%
 
 if "%OMCSL_DEBUG%" == "1" (
   if exist "logs" if %JAVA_VER% GEQ 11 (
-    set JAVA_OPTS=%JAVA_OPTS% @%~dp0\..\flags\xlog-gc.txt
+    set JAVA_OPTS=%JAVA_OPTS% @%~dp0\..\flags\GC-xlog.txt
   )
   echo --------------------------------------------------
   echo [OMCSL][DEBUG]: JAVA_BIN   = %JAVA_BIN%
