@@ -4,7 +4,6 @@
 
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
--XX:-UseCompressedClassPointers
 -XX:MaxDirectMemorySize=1024G
 
 -XX:-UseG1GC
