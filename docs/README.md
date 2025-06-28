@@ -11,7 +11,6 @@
 
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
--XX:-UseCompressedClassPointers
 -XX:MaxDirectMemorySize=1024G
 
 -XX:+UseG1GC
@@ -28,7 +27,7 @@
 ```
 - 方便命令行使用
 ```
--XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:-UseCompressedClassPointers -XX:MaxDirectMemorySize=1024G  -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:G1HeapRegionSize=4M -XX:G1NewSizePercent=100 -XX:G1MaxNewSizePercent=100 -XX:+AlwaysTenure -XX:-G1UseAdaptiveIHOP -XX:InitiatingHeapOccupancyPercent=80 -XX:G1MixedGCLiveThresholdPercent=95 -XX:+ParallelRefProcEnabled 
+-XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=1024G  -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:G1HeapRegionSize=4M -XX:G1NewSizePercent=100 -XX:G1MaxNewSizePercent=100 -XX:+AlwaysTenure -XX:-G1UseAdaptiveIHOP -XX:InitiatingHeapOccupancyPercent=80 -XX:G1MixedGCLiveThresholdPercent=95 -XX:+ParallelRefProcEnabled 
 ```
 - [运行效果](./test-summary-g1gc.md)
 - [参数讲解](./explain-g1gc.md)
@@ -49,7 +48,6 @@
 
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
--XX:-UseCompressedClassPointers
 -XX:MaxDirectMemorySize=1024G
 
 -XX:-UseG1GC
@@ -62,7 +60,7 @@
 ```
 - 方便命令行使用
 ```
--XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:-UseCompressedClassPointers -XX:MaxDirectMemorySize=1024G  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive  --add-modules jdk.incubator.vector 
+-XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=1024G  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive  --add-modules jdk.incubator.vector 
 ```
 
 > [!NOTE]
@@ -83,7 +81,6 @@
 
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
--XX:-UseCompressedClassPointers
 -XX:MaxDirectMemorySize=1024G
 
 -XX:-UseG1GC
@@ -98,7 +95,7 @@
 ```
 - 方便命令行使用
 ```
--XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:-UseCompressedClassPointers -XX:MaxDirectMemorySize=1024G  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive -XX:ZCollectionIntervalMinor=0.95 -XX:ZUncommitDelay=2  --add-modules jdk.incubator.vector 
+-XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=1024G  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive -XX:ZCollectionIntervalMinor=0.95 -XX:ZUncommitDelay=2  --add-modules jdk.incubator.vector 
 ```
 
 > [!NOTE]
