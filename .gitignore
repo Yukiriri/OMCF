@@ -1,2 +1,2 @@
-dev/**
-docs/README.template.*
+/dev/**
+/docs/README.template.*
