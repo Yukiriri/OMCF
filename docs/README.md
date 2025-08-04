@@ -32,8 +32,11 @@
 - [运行效果](./test-summary-g1gc.md)
 - [参数讲解](./explain-g1gc.md)
 
+> [!IMPORTANT]
+> Windows需要注意行尾必须为LF  
+
 > [!NOTE]
-> 服务端、客户端、Velocity通用
+> 服务端、客户端、Velocity通用  
 
 > [!TIP]
 > 如果使用Java17+  
@@ -63,11 +66,14 @@
 -XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=1024G  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive  --add-modules jdk.incubator.vector 
 ```
 
+> [!IMPORTANT]
+> Windows需要注意行尾必须为LF  
+
 > [!NOTE]
-> 服务端、客户端、Velocity通用
+> 服务端、客户端、Velocity通用  
 
 > [!IMPORTANT]
-> 需要Java21+
+> 需要Java21+  
 
 # G1GC-内存紧凑模式
 先天不合适，做不了
@@ -98,11 +104,14 @@
 -XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=1024G  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive -XX:ZCollectionIntervalMinor=0.95 -XX:ZUncommitDelay=2  --add-modules jdk.incubator.vector 
 ```
 
+> [!IMPORTANT]
+> Windows需要注意行尾必须为LF  
+
 > [!NOTE]
-> 服务端、客户端、Velocity通用，但最适合客户端
+> 服务端、客户端、Velocity通用，但最适合客户端  
 
 > [!IMPORTANT]
-> 需要Java21+
+> 需要Java21+  
 
 # 使用方式
 - 服务端
@@ -142,13 +151,6 @@ MC一般值得计算的Java内存有
   - 给服务端-Xmx4G，运行期占用大概是（堆4G + 非堆1G = 5G占用）
   - 给客户端-Xmx4G，运行期占用大概是（堆4G + 非堆1G + OpenGL 2G = 7G占用）
 
-## 一点TPS排查经验
-- 可以使用[`spark`](https://spark.lucko.me/download)采集并导出插件/模组占用耗时堆栈图  
-  找出堆栈顺序里最先出现的tick占用高的插件/模组  
-
-- 如果想安装`C2ME`模组  
-  分配的内存不能太小，必须和CPU核心数成正比  
-
 ## 学习参考
 - [Aikar's Flags](https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft)
 - [VM Options Explorer](https://chriswhocodes.com/vm-options-explorer.html)
@@ -166,6 +168,3 @@ MC一般值得计算的Java内存有
 
 ## Stargazers
 [![Stargazers](https://starchart.cc/Yukiriri/OMCF.svg?variant=adaptive)]()
-
-## 无用的吐槽
-我现在已经不那么觉得JVM不行了，就是觉得MC需要一场真正的脱胎换骨
