@@ -10,7 +10,7 @@
 -XX:+UseZGC
 -XX:+ZGenerational
 -XX:-ZProactive
--XX:ZCollectionIntervalMinor=0.95
+-XX:ZCollectionIntervalMinor=1.1
 -XX:ZUncommitDelay=2
 
 --add-modules jdk.incubator.vector
