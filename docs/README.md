@@ -103,8 +103,8 @@
 > 需要Java21+  
 
 > [!IMPORTANT]
-> 不需要设置-Xms
-> 或者-Xms设置到比-Xmx更小
+> 不需要设置-Xms  
+> 或者-Xms设置到比-Xmx更小  
 
 > [!NOTE]
 > 服务端、客户端、Velocity通用，但最适合客户端  
