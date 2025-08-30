@@ -1,6 +1,7 @@
 -XX:+IgnoreUnrecognizedVMOptions
 -XX:+UnlockExperimentalVMOptions
 -Dfile.encoding=UTF-8
+-Djava.awt.headless=true
 
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC

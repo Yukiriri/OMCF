@@ -8,6 +8,7 @@
 -XX:+IgnoreUnrecognizedVMOptions
 -XX:+UnlockExperimentalVMOptions
 -Dfile.encoding=UTF-8
+-Djava.awt.headless=true
 
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
@@ -28,7 +29,7 @@
 ```
 - 方便命令行使用
 ```
--XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=1024G  -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:G1ConcMarkStepDurationMillis=2.0 -XX:G1HeapRegionSize=8M -XX:G1NewSizePercent=100 -XX:G1MaxNewSizePercent=100 -XX:+AlwaysTenure -XX:-G1UseAdaptiveIHOP -XX:InitiatingHeapOccupancyPercent=80 -XX:G1MixedGCLiveThresholdPercent=95 -XX:+ParallelRefProcEnabled 
+-XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8 -Djava.awt.headless=true  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=1024G  -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:G1ConcMarkStepDurationMillis=2.0 -XX:G1HeapRegionSize=8M -XX:G1NewSizePercent=100 -XX:G1MaxNewSizePercent=100 -XX:+AlwaysTenure -XX:-G1UseAdaptiveIHOP -XX:InitiatingHeapOccupancyPercent=80 -XX:G1MixedGCLiveThresholdPercent=95 -XX:+ParallelRefProcEnabled 
 ```
 - [运行效果](./test-summary-g1gc.md)
 - [参数讲解](./explain-g1gc.md)
@@ -46,6 +47,7 @@
 -XX:+IgnoreUnrecognizedVMOptions
 -XX:+UnlockExperimentalVMOptions
 -Dfile.encoding=UTF-8
+-Djava.awt.headless=true
 
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
@@ -61,7 +63,7 @@
 ```
 - 方便命令行使用
 ```
--XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=1024G  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive  --add-modules jdk.incubator.vector 
+-XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8 -Djava.awt.headless=true  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=1024G  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive  --add-modules jdk.incubator.vector 
 ```
 
 > [!IMPORTANT]
@@ -79,6 +81,7 @@
 -XX:+IgnoreUnrecognizedVMOptions
 -XX:+UnlockExperimentalVMOptions
 -Dfile.encoding=UTF-8
+-Djava.awt.headless=true
 
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
@@ -96,7 +99,7 @@
 ```
 - 方便命令行使用
 ```
--XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=1024G  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive -XX:ZCollectionIntervalMinor=1.1 -XX:ZUncommitDelay=2  --add-modules jdk.incubator.vector 
+-XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8 -Djava.awt.headless=true  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=1024G  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive -XX:ZCollectionIntervalMinor=1.1 -XX:ZUncommitDelay=2  --add-modules jdk.incubator.vector 
 ```
 
 > [!IMPORTANT]
