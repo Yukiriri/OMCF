@@ -17,3 +17,7 @@
 -XX:InitiatingHeapOccupancyPercent=80
 -XX:G1MixedGCLiveThresholdPercent=95
 -XX:+ParallelRefProcEnabled
+
+-XX:G1PeriodicGCInterval=1100
+-XX:MinHeapFreeRatio=5
+-XX:MaxHeapFreeRatio=5

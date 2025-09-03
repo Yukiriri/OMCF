@@ -7,6 +7,8 @@ omcsl \<jar\> \<Xmx\> \[GC\]
 - GC  
   使用什么GC
   - G1GC
+  - G1GCC  
+    内存紧凑模式G1GC，以更高CPU消耗控制更低的内存水位
   - ZGC
   - ZGCC  
     内存紧凑模式ZGC，以更高CPU消耗控制更低的内存水位

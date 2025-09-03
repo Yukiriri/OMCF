@@ -11,6 +11,7 @@
 -XX:+UseZGC
 -XX:+ZGenerational
 -XX:-ZProactive
+
 -XX:ZCollectionIntervalMinor=1.1
 -XX:ZUncommitDelay=2
 

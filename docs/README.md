@@ -16,7 +16,6 @@
 
 -XX:+UseG1GC
 -XX:MaxGCPauseMillis=100
--XX:G1ConcMarkStepDurationMillis=2.0
 -XX:G1HeapRegionSize=8M
 -XX:G1NewSizePercent=100
 -XX:G1MaxNewSizePercent=100
@@ -29,7 +28,7 @@
 ```
 - 方便命令行使用
 ```
--XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8 -Djava.awt.headless=true  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=1024G  -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:G1ConcMarkStepDurationMillis=2.0 -XX:G1HeapRegionSize=8M -XX:G1NewSizePercent=100 -XX:G1MaxNewSizePercent=100 -XX:+AlwaysTenure -XX:-G1UseAdaptiveIHOP -XX:InitiatingHeapOccupancyPercent=80 -XX:G1MixedGCLiveThresholdPercent=95 -XX:+ParallelRefProcEnabled 
+-XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8 -Djava.awt.headless=true  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=1024G  -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:G1HeapRegionSize=8M -XX:G1NewSizePercent=100 -XX:G1MaxNewSizePercent=100 -XX:+AlwaysTenure -XX:-G1UseAdaptiveIHOP -XX:InitiatingHeapOccupancyPercent=80 -XX:G1MixedGCLiveThresholdPercent=95 -XX:+ParallelRefProcEnabled 
 ```
 - [运行效果](./test-summary-g1gc.md)
 - [参数讲解](./explain-g1gc.md)
@@ -72,10 +71,47 @@
 > [!NOTE]
 > 服务端、客户端、Velocity通用  
 
-# G1GC-内存紧凑模式
-先天不合适，目前还没能实现
+# 内存紧凑G1GC
+- 方便写入文件使用
+```
+-XX:+IgnoreUnrecognizedVMOptions
+-XX:+UnlockExperimentalVMOptions
+-Dfile.encoding=UTF-8
+-Djava.awt.headless=true
 
-# ZGC-内存紧凑模式
+-XX:+AlwaysPreTouch
+-XX:+DisableExplicitGC
+-XX:MaxDirectMemorySize=1024G
+
+-XX:+UseG1GC
+-XX:MaxGCPauseMillis=100
+-XX:G1HeapRegionSize=8M
+-XX:G1NewSizePercent=100
+-XX:G1MaxNewSizePercent=100
+-XX:+AlwaysTenure
+-XX:-G1UseAdaptiveIHOP
+-XX:InitiatingHeapOccupancyPercent=80
+-XX:G1MixedGCLiveThresholdPercent=95
+-XX:+ParallelRefProcEnabled
+
+-XX:G1PeriodicGCInterval=1100
+-XX:MinHeapFreeRatio=5
+-XX:MaxHeapFreeRatio=5
+
+```
+- 方便命令行使用
+```
+-XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8 -Djava.awt.headless=true  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=1024G  -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:G1HeapRegionSize=8M -XX:G1NewSizePercent=100 -XX:G1MaxNewSizePercent=100 -XX:+AlwaysTenure -XX:-G1UseAdaptiveIHOP -XX:InitiatingHeapOccupancyPercent=80 -XX:G1MixedGCLiveThresholdPercent=95 -XX:+ParallelRefProcEnabled  -XX:G1PeriodicGCInterval=1100 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=5 
+```
+
+> [!IMPORTANT]
+> 需要Java12+  
+
+> [!IMPORTANT]
+> 不需要设置-Xms  
+> 或者-Xms设置到比-Xmx更小  
+
+# 内存紧凑ZGC
 - 方便写入文件使用
 ```
 -XX:+IgnoreUnrecognizedVMOptions
@@ -91,6 +127,7 @@
 -XX:+UseZGC
 -XX:+ZGenerational
 -XX:-ZProactive
+
 -XX:ZCollectionIntervalMinor=1.1
 -XX:ZUncommitDelay=2
 
@@ -99,7 +136,7 @@
 ```
 - 方便命令行使用
 ```
--XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8 -Djava.awt.headless=true  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=1024G  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive -XX:ZCollectionIntervalMinor=1.1 -XX:ZUncommitDelay=2  --add-modules jdk.incubator.vector 
+-XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockExperimentalVMOptions -Dfile.encoding=UTF-8 -Djava.awt.headless=true  -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:MaxDirectMemorySize=1024G  -XX:-UseG1GC -XX:+UseZGC -XX:+ZGenerational -XX:-ZProactive  -XX:ZCollectionIntervalMinor=1.1 -XX:ZUncommitDelay=2  --add-modules jdk.incubator.vector 
 ```
 
 > [!IMPORTANT]
@@ -114,17 +151,19 @@
 
 # 选择推荐
 按机器配置场景来选择是：
-|              | 客户端          | 服务端          |
-| :----------- | :-------------- | :-------------- |
-| 低主频少核心 | G1GC            | G1GC            |
-| 低主频多核心 | 首选ZGC下策G1GC | 首选G1GC上策ZGC |
-| 高主频少核心 | ZGC             | 首选ZGC下策G1GC |
-| 高主频多核心 | ZGC             | ZGC             |
+|              | 客户端                          | 服务端                          |
+| :----------- | :------------------------------ | :------------------------------ |
+| 低主频少核心 | [`G1GC`](#G1GC)                 | [`G1GC`](#G1GC)                 |
+| 低主频多核心 | [`ZGC`](#ZGC) / [`G1GC`](#G1GC) | [`G1GC`](#G1GC) / [`ZGC`](#ZGC) |
+| 高主频少核心 | [`ZGC`](#ZGC)                   | [`ZGC`](#ZGC) / [`G1GC`](#G1GC) |
+| 高主频多核心 | [`ZGC`](#ZGC)                   | [`ZGC`](#ZGC)                   |
 
 按MC运行的侧重来选择是：
-- 追求低卡顿：[`ZGC`](#ZGC)
-- 追求低卡顿低内存占用：[`内存紧凑ZGC`](#ZGC-内存紧凑模式)
-- 追求低负载：[`G1GC`](#G1GC)
+|            | <=1.20                          | >=1.21                        |
+| :--------- | :------------------------------ | :---------------------------- |
+| 低GC负载   | [`G1GC`](#G1GC)                 | [`G1GC`](#G1GC)               |
+| 低GC停顿   | Shenandoah GC （负载不友好）    | [`ZGC`](#ZGC)                 |
+| 低内存占用 | [`内存紧凑G1GC`](#内存紧凑G1GC) | [`内存紧凑ZGC`](#内存紧凑ZGC) |
 
 # 使用方式
 - 服务端
