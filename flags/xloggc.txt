@@ -1,0 +1,5 @@
+-Xlog:gc:file="logs/gc-heap.log":time:filecount=1
+-Xlog:gc+metaspace:file="logs/gc-metaspace.log":time:filecount=1
+-Xlog:codecache*:file="logs/gc-codecache.log":time:filecount=1
+
+# -Xlog:gc+heap*=debug,gc+phases*=debug:file="logs/gc-.log":time:filecount=1
