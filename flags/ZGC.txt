@@ -5,12 +5,9 @@
 
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
--XX:ReservedCodeCacheSize=384M
 -XX:MaxDirectMemorySize=1024G
 
--XX:-UseG1GC
 -XX:+UseZGC
--XX:+ZGenerational
 -XX:-ZProactive
 
---add-modules jdk.incubator.vector
+-XX:ZFragmentationLimit=5.0
