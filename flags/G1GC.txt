@@ -5,14 +5,22 @@
 
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
--XX:ReservedCodeCacheSize=384M
 -XX:MaxDirectMemorySize=1024G
 
 -XX:+UseG1GC
+-XX:MaxGCPauseMills=10
+-XX:G1RSetUpdatingPauseTimePercent=50
 -XX:+ParallelRefProcEnabled
--XX:G1NewSizePercent=100
+-XX:G1NewSizePercent=1
 -XX:G1MaxNewSizePercent=100
--XX:+AlwaysTenure
+-XX:G1ReservePercent=2
 -XX:-G1UseAdaptiveIHOP
--XX:InitiatingHeapOccupancyPercent=80
--XX:G1MixedGCLiveThresholdPercent=95
+-XX:InitiatingHeapOccupancyPercent=10
+-XX:G1OldCSetRegionThresholdPercent=5
+-XX:G1MixedGCCountTarget=20
+-XX:G1HeapWastePercent=5
+-XX:+AlwaysTenure
+
+-XX:G1MixedGCLiveThresholdPercent=90
+-XX:MinHeapFreeRatio=10
+-XX:MaxHeapFreeRatio=10
