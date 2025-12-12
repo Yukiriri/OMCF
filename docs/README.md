@@ -1,30 +1,28 @@
 # OMCF
-吸收了各种MC调优后再进行重新定制的MC JVM参数，将同时研究服务端和客户端的方案。  
-如果遇到问题或者有更好的调优，欢迎提出。  
-
-## 运行效果
-[statistical.md](./statistical/statistical.md)
+吸收了各种MC调优后再进行重新定制的MC JVM参数，同时提供服务端和客户端的方案  
+如果遇到问题或者有更好的调优，欢迎提出  
 
 ## 用途一览
-[G1GC]: ../flags/G1GC.txt
-[G1GCC]: ../flags/G1GCC.txt
-[ZGC]: ../flags/ZGC.txt
-[ZGCC]: ../flags/ZGCC.txt
+[G1GC.txt]: ../flags/G1GC.txt
+[ZGC.txt]: ../flags/ZGC.txt
+[SGC.txt]: ../flags/SGC.txt
 
-| JVM参数 | 用途       | JDK要求 | 适用范围                   |
-| :------ | :--------- | :------ | :------------------------- |
-| [G1GC]  | 低GC负载   | JDK8+   | 服务端 & 客户端 & Velocity |
-| [G1GCC] | 低内存占用 | JDK12+  | 服务端 & 客户端 & Velocity |
-| [ZGC]   | 低GC停顿   | JDK21+  | 服务端 & 客户端 & Velocity |
-| [ZGCC]  | 低内存占用 | JDK21+  | 服务端 & 客户端 & Velocity |
+| JVM参数    | 用途                  | JDK要求 | 适用范围                   |
+| :--------- | :-------------------- | :------ | :------------------------- |
+| [G1GC.txt] | 轻微STW均衡GC         | JDK8+   | 服务端 & 客户端            |
+| [ZGC.txt]  | 无感STW高内存开销GC   | JDK17+  | 服务端 & 客户端 & Velocity |
+| [SGC.txt]  | 无感STW中等内存开销GC | JDK24+  | 服务端 & 客户端            |
 
-## 选择推荐
-|              | 客户端 | 服务端 |
-| :----------- | :----- | :----- |
-| 低主频少核心 | [G1GC] | [G1GC] |
-| 低主频多核心 | [ZGC]  | [G1GC] |
-| 高主频少核心 | [ZGC]  | [G1GC] |
-| 高主频多核心 | [ZGC]  | [ZGC]  |
+- ## 运行效果
+  [数据统计](./statistical/statistical.md)
+
+- ## 选择推荐
+  |              | 客户端                | 服务端                |
+  | :----------- | :-------------------- | :-------------------- |
+  | 低主频少核心 | [G1GC.txt]            | [G1GC.txt]            |
+  | 低主频多核心 | [ZGC.txt] / [SGC.txt] | [G1GC.txt]            |
+  | 高主频少核心 | [ZGC.txt] / [SGC.txt] | [G1GC.txt]            |
+  | 高主频多核心 | [ZGC.txt] / [SGC.txt] | [ZGC.txt] / [SGC.txt] |
 
 ## 使用方式
 - 服务端  
@@ -52,20 +50,21 @@
 > ```
 > @user_jvm_args.txt一定要在-jar之前  
 
+> [!TIP]  
+> G1GC和SGC可以有节省内存的用途  
+> 如果想节省内存占用，就把-Xms设置到比-Xmx更低  
+> 但是G1GC的-Xms不要给太小，不然反复伸缩进程内存会导致STW大幅波动  
+
 ## JDK推荐
-  - [Zulu](https://www.azul.com/downloads/?package=jdk#zulu)
-  - [Liberica](https://bell-sw.com/pages/downloads/)
-  - [Temurin](https://adoptium.net/temurin/releases/)
+- [Liberica](https://bell-sw.com/pages/downloads/)
+- [Zulu](https://www.azul.com/downloads/?package=jdk#zulu)
 
-## 一点MC内存经验
-MC一般值得计算的Java内存有
-  - 堆内存（Xmx）
-  - 非堆内存（Metaspace，Code Cache，...）
-  - 外界API管理的内存
+> [!TIP]  
+> 推荐使用LTS版本，可以有更广范围的旧版MC兼容性  
 
-估算方式例如：
-  - 给服务端-Xmx4G，运行期占用大概是（堆4G + 非堆1G = 5G占用）
-  - 给客户端-Xmx4G，运行期占用大概是（堆4G + 非堆1G + OpenGL 2G = 7G占用）
+## 经验心得
+- [内存估算](./experience/memory.md)
+- [G1GC](./experience/G1GC.md)
 
 ## 学习参考
 - https://chriswhocodes.com/vm-options-explorer.html
@@ -73,4 +72,4 @@ MC一般值得计算的Java内存有
 - https://pdai.tech/md/java/jvm/java-jvm-gc-g1.html
 
 ## Stargazers
-[![Stargazers](https://starchart.cc/Yukiriri/OMCF.svg?variant=adaptive)]()
+[![Stargazers](https://starchart.cc/Yukiriri/OMCF.svg?variant=adaptive)]
