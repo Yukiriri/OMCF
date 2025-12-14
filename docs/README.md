@@ -24,6 +24,11 @@
   | 高主频少核心 | [ZGC.txt] / [SGC.txt] | [G1GC.txt]            |
   | 高主频多核心 | [ZGC.txt] / [SGC.txt] | [ZGC.txt] / [SGC.txt] |
 
+> [!TIP]  
+> G1GC和SGC可以有节省内存的用途  
+> 如果想节省内存占用，就把-Xms设置到比-Xmx更低  
+> 但是G1GC的-Xms不要给太小，不然反复伸缩进程内存会导致STW大幅波动  
+
 ## 使用方式
 - 服务端  
   - 添加到java启动命令行  
@@ -50,11 +55,6 @@
 > ```
 > @user_jvm_args.txt一定要在-jar之前  
 
-> [!TIP]  
-> G1GC和SGC可以有节省内存的用途  
-> 如果想节省内存占用，就把-Xms设置到比-Xmx更低  
-> 但是G1GC的-Xms不要给太小，不然反复伸缩进程内存会导致STW大幅波动  
-
 ## JDK推荐
 - [Liberica](https://bell-sw.com/pages/downloads/)
 - [Zulu](https://www.azul.com/downloads/?package=jdk#zulu)
@@ -72,4 +72,4 @@
 - https://pdai.tech/md/java/jvm/java-jvm-gc-g1.html
 
 ## Stargazers
-[![Stargazers](https://starchart.cc/Yukiriri/OMCF.svg?variant=adaptive)]
+![Stargazers](https://starchart.cc/Yukiriri/OMCF.svg?variant=adaptive)
