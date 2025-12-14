@@ -10,4 +10,5 @@
 -XX:+UseZGC
 -XX:-ZProactive
 
+-XX:ZUncommitDelay=10
 -XX:ZFragmentationLimit=5.0
