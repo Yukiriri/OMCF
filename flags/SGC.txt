@@ -10,11 +10,10 @@
 -XX:+UseShenandoahGC
 -XX:ShenandoahGCMode=generational
 -XX:ShenandoahGCHeuristics=static
--XX:ShenandoahMinRegionSize=1M
 -XX:ShenandoahMinYoungPercentage=1
 -XX:ShenandoahMinFreeThreshold=2
--XX:ShenandoahMaxYoungPercentage=22
--XX:ShenandoahInitFreeThreshold=22
+-XX:ShenandoahMaxYoungPercentage=25
+-XX:ShenandoahInitFreeThreshold=25
 -XX:-ShenandoahGenerationalAdaptiveTenuring
 -XX:ShenandoahGenerationalMinTenuringAge=1
 -XX:ShenandoahGenerationalMaxTenuringAge=1
