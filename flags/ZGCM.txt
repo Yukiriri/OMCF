@@ -8,5 +8,13 @@
 -XX:MaxDirectMemorySize=1024G
 
 -XX:+UseZGC
+-XX:-ZProactive
+-XX:+ZGenerational
+
+-XX:ZAllocationSpikeTolerance=6.0
+-XX:ZCollectionIntervalMinor=1.0
+-XX:ZCollectionIntervalMajor=20.0
+-XX:ZYoungCompactionLimit=10
+-XX:ZFragmentationLimit=5
 
 -XX:ZUncommitDelay=10
