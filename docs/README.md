@@ -1,31 +1,35 @@
 # OMCF
 吸收了各种MC调优后再进行重新定制的MC JVM参数，同时提供服务端和客户端的方案  
 如果遇到问题或者有更好的调优，欢迎提出  
+祝你能收获更多快乐  
 
 ## 用途一览
 [G1GC.txt]: ../flags/G1GC.txt
+[G1GCM.txt]: ../flags/G1GCM.txt
 [ZGC.txt]: ../flags/ZGC.txt
+[ZGCM.txt]: ../flags/ZGCM.txt
 [SGC.txt]: ../flags/SGC.txt
+[SGCM.txt]: ../flags/SGCM.txt
 
-| JVM参数    | 用途                  | JDK要求 | 适用范围                   |
-| :--------- | :-------------------- | :------ | :------------------------- |
-| [G1GC.txt] | 轻微STW均衡GC         | JDK8+   | 服务端 & 客户端            |
-| [ZGC.txt]  | 无感STW高内存开销GC   | JDK17+  | 服务端 & 客户端 & Velocity |
-| [SGC.txt]  | 无感STW中等内存开销GC | JDK24+  | 服务端 & 客户端            |
+| JVM参数    | 调校目标            | JDK要求 | 适用范围                   |
+| :--------- | :------------------ | :------ | :------------------------- |
+| [G1GC.txt] | 轻度STW均衡GC       | JDK8+   | 服务端 & 客户端            |
+| [ZGC.txt]  | 无感STW高内存利用GC | JDK17+  | 服务端 & 客户端 & Velocity |
+| [SGCM.txt] | 无感STW中内存利用GC | JDK24+  | 服务端 & 客户端 & Velocity |
 
 - ## 运行效果
-  [数据统计](./statistical/statistical.md)
+  - [服务端运行统计](./statistical/server/server.md)
 
 - ## 选择推荐
-  |              | 客户端                | 服务端                |
-  | :----------- | :-------------------- | :-------------------- |
-  | 低主频少核心 | [G1GC.txt]            | [G1GC.txt]            |
-  | 低主频多核心 | [ZGC.txt] / [SGC.txt] | [G1GC.txt]            |
-  | 高主频少核心 | [ZGC.txt] / [SGC.txt] | [G1GC.txt]            |
-  | 高主频多核心 | [ZGC.txt] / [SGC.txt] | [ZGC.txt] / [SGC.txt] |
+  |              | 客户端                 | 服务端                 |
+  | :----------- | :--------------------- | :--------------------- |
+  | 低主频少核心 | [G1GC.txt]             | [G1GC.txt]             |
+  | 低主频多核心 | [SGCM.txt] / [ZGC.txt] | [G1GC.txt]             |
+  | 高主频少核心 | [SGCM.txt] / [ZGC.txt] | [G1GC.txt]             |
+  | 高主频多核心 | [SGCM.txt] / [ZGC.txt] | [SGCM.txt] / [ZGC.txt] |
 
 > [!TIP]  
-> G1GC和SGC可以有节省内存的用途  
+> G1GC和SGCM可以有节省内存的用途  
 > 如果想节省内存占用，就把-Xms设置到比-Xmx更低  
 > 但是G1GC的-Xms不要给太小，不然反复伸缩进程内存会导致STW大幅波动  
 
@@ -64,12 +68,14 @@
 
 ## 经验心得
 - [内存估算](./experience/memory.md)
-- [G1GC](./experience/G1GC.md)
 
 ## 学习参考
 - https://chriswhocodes.com/vm-options-explorer.html
 - https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft
-- https://pdai.tech/md/java/jvm/java-jvm-gc-g1.html
+- https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/g1/g1ConcurrentMark.cpp
+- https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/z/zDirector.cpp
+- https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/shenandoah/heuristics/shenandoahHeuristics.cpp
+- https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/shenandoah/heuristics/shenandoahStaticHeuristics.cpp
 
 ## Stargazers
 ![Stargazers](https://starchart.cc/Yukiriri/OMCF.svg?variant=adaptive)
