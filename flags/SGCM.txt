@@ -12,12 +12,12 @@
 -XX:ShenandoahGCHeuristics=static
 
 -XX:ShenandoahMinYoungPercentage=1
--XX:ShenandoahMinFreeThreshold=5
--XX:ShenandoahMaxYoungPercentage=100
+-XX:ShenandoahMinFreeThreshold=2
+-XX:ShenandoahMaxYoungPercentage=25
 -XX:-ShenandoahGenerationalAdaptiveTenuring
 -XX:ShenandoahGenerationalMinTenuringAge=1
 -XX:ShenandoahGenerationalMaxTenuringAge=1
--XX:ShenandoahGarbageThreshold=20
--XX:ShenandoahOldGarbageThreshold=20
+-XX:ShenandoahGarbageThreshold=10
+-XX:ShenandoahOldGarbageThreshold=10
 
 -XX:ShenandoahUncommitDelay=10000
