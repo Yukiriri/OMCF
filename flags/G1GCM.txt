@@ -19,10 +19,10 @@
 -XX:+AlwaysTenure
 
 -XX:-G1UseAdaptiveIHOP
--XX:InitiatingHeapOccupancyPercent=50
--XX:G1MixedGCCountTarget=10
--XX:G1OldCSetRegionThresholdPercent=8
--XX:G1MixedGCLiveThresholdPercent=80
+-XX:InitiatingHeapOccupancyPercent=10
+-XX:G1MixedGCCountTarget=1
+-XX:G1OldCSetRegionThresholdPercent=45
+-XX:G1MixedGCLiveThresholdPercent=90
 -XX:G1HeapWastePercent=2
 
 -XX:MinHeapFreeRatio=5
