@@ -1,4 +1,6 @@
 -Xlog:gc:file="logs/gc.log":time:filecount=1
+-Xlog:gc+director*=debug:file="logs/gc-director-debug.log":time:filecount=1
+-Xlog:gc+ergo*=debug:file="logs/gc-ergo-debug.log":time:filecount=1
 -Xlog:gc+heap*=debug:file="logs/gc-heap-debug.log":time:filecount=1
 -Xlog:gc+phases*=debug:file="logs/gc-phases-debug.log":time:filecount=1
 
