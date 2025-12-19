@@ -9,8 +9,8 @@
 
 -XX:+UseG1GC
 -XX:+ParallelRefProcEnabled
--XX:MaxGCPauseMillis=20
--XX:GCPauseIntervalMillis=21
+-XX:MaxGCPauseMillis=60
+-XX:GCPauseIntervalMillis=61
 -XX:G1ConcMarkStepDurationMillis=5
 
 -XX:G1NewSizePercent=1
@@ -20,8 +20,8 @@
 
 -XX:-G1UseAdaptiveIHOP
 -XX:InitiatingHeapOccupancyPercent=10
--XX:G1MixedGCCountTarget=1
--XX:G1OldCSetRegionThresholdPercent=45
+-XX:G1MixedGCCountTarget=2
+-XX:G1OldCSetRegionThresholdPercent=30
 -XX:G1MixedGCLiveThresholdPercent=90
 -XX:G1HeapWastePercent=2
 
