@@ -11,10 +11,9 @@
 -XX:-ZProactive
 -XX:+ZGenerational
 
--XX:ZAllocationSpikeTolerance=6.0
--XX:ZCollectionIntervalMinor=1.0
--XX:ZCollectionIntervalMajor=20.0
--XX:ZYoungCompactionLimit=10
--XX:ZFragmentationLimit=5
+-XX:ZYoungCompactionLimit=20
+-XX:ZFragmentationLimit=20
 
 -XX:ZUncommitDelay=10
+-XX:ZCollectionIntervalMinor=1.2
+-XX:ZCollectionIntervalMajor=30.0

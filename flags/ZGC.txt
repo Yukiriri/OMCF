@@ -8,5 +8,8 @@
 -XX:MaxDirectMemorySize=1024G
 
 -XX:+UseZGC
+-XX:-ZProactive
+-XX:+ZGenerational
 
--XX:ZUncommitDelay=10
+-XX:ZYoungCompactionLimit=20
+-XX:ZFragmentationLimit=20
