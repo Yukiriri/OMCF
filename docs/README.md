@@ -5,33 +5,36 @@
 
 ## 用途一览
 [G1GC.txt]: ../flags/G1GC.txt
-[G1GCM.txt]: ../flags/G1GCM.txt
+[G1GC-C.txt]: ../flags/G1GC-C.txt
 [ZGC.txt]: ../flags/ZGC.txt
-[ZGCM.txt]: ../flags/ZGCM.txt
+[ZGC-C.txt]: ../flags/ZGC-C.txt
 [SGC.txt]: ../flags/SGC.txt
-[SGCM.txt]: ../flags/SGCM.txt
+[SGC-C.txt]: ../flags/SGC-C.txt
 
-| JVM参数    | 调校目标            | JDK要求 | 适用范围                   |
-| :--------- | :------------------ | :------ | :------------------------- |
-| [G1GC.txt] | 轻度STW均衡GC       | JDK8+   | 服务端 & 客户端            |
-| [ZGC.txt]  | 无感STW高内存利用GC | JDK17+  | 服务端 & 客户端 & Velocity |
-| [SGCM.txt] | 无感STW中内存利用GC | JDK24+  | 服务端 & 客户端 & Velocity |
+| JVM参数      | 调校目标            | JDK要求 | 适用场景                   |
+| :----------- | :------------------ | :------ | :------------------------- |
+| [G1GC.txt]   | 轻度STW均衡GC       | JDK8+   | 服务端 & 客户端            |
+| [G1GC-C.txt] | 轻度STW低内存利用GC | JDK8+   | 客户端                     |
+| [ZGC.txt]    | 无感STW高内存利用GC | JDK17+  | 服务端 & 客户端 & Velocity |
+| [ZGC-C.txt]  | 无感STW中内存利用GC | JDK21+  | 客户端                     |
+| [SGC.txt]    | 无感STW中内存利用GC | JDK24+  | 服务端 & 客户端 & Velocity |
+| [SGC-C.txt]  | 无感STW低内存利用GC | JDK24+  | 客户端                     |
 
 - ## 运行效果
   - [服务端运行统计](./statistical/server/server.md)
 
-- ## 选择推荐
-  |              | 客户端                 | 服务端                 |
-  | :----------- | :--------------------- | :--------------------- |
-  | 低主频少核心 | [G1GC.txt]             | [G1GC.txt]             |
-  | 低主频多核心 | [SGCM.txt] / [ZGC.txt] | [G1GC.txt]             |
-  | 高主频少核心 | [SGCM.txt] / [ZGC.txt] | [G1GC.txt]             |
-  | 高主频多核心 | [SGCM.txt] / [ZGC.txt] | [SGCM.txt] / [ZGC.txt] |
+- ## 参考推荐
+  |              | 客户端                           | 服务端                       |
+  | :----------- | :------------------------------- | :--------------------------- |
+  | 少核心低内存 | 优选[G1GC-C.txt] 备选[G1GC.txt]  | [G1GC.txt]                   |
+  | 多核心低内存 | 优选[SGC-C.txt] 备选[G1GC-C.txt] | 优选[ZGC.txt] 备选[G1GC.txt] |
+  | 少核心高内存 | 优选[G1GC-C.txt] 备选[ZGC-C.txt] | 优选[G1GC.txt] 备选[ZGC.txt] |
+  | 多核心高内存 | [ZGC-C.txt]                      | [ZGC.txt]                    |
 
 > [!TIP]  
-> G1GC和SGCM可以有节省内存的用途  
+> `G1GC-C` `ZGC-C` `SGC-C`可以有节省内存的用途  
 > 如果想节省内存占用，就把-Xms设置到比-Xmx更低  
-> 但是G1GC的-Xms不要给太小，不然反复伸缩进程内存会导致STW大幅波动  
+> 但是`G1GC-C`的-Xms不要给太小，不然反复伸缩进程内存会导致STW大幅波动  
 
 ## 使用方式
 - 服务端  
@@ -72,10 +75,10 @@
 ## 学习参考
 - https://chriswhocodes.com/vm-options-explorer.html
 - https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft
-- https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/g1/g1ConcurrentMark.cpp
-- https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/z/zDirector.cpp
-- https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/shenandoah/heuristics/shenandoahHeuristics.cpp
-- https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/shenandoah/heuristics/shenandoahStaticHeuristics.cpp
+- [share/gc/g1/g1ConcurrentMark.cpp](https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/g1/g1ConcurrentMark.cpp)
+- [share/gc/z/zDirector.cpp](https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/z/zDirector.cpp)
+- [share/gc/shenandoah/heuristics/shenandoahHeuristics.cpp](https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/shenandoah/heuristics/shenandoahHeuristics.cpp)
+- [share/gc/shenandoah/heuristics/shenandoahStaticHeuristics.cpp](https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/shenandoah/heuristics/shenandoahStaticHeuristics.cpp)
 
 ## Stargazers
 ![Stargazers](https://starchart.cc/Yukiriri/OMCF.svg?variant=adaptive)
