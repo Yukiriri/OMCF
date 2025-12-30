@@ -8,13 +8,16 @@
 -XX:MaxDirectMemorySize=1024G
 
 -XX:+UseShenandoahGC
--XX:ShenandoahGCHeuristics=static
 -XX:ShenandoahGCMode=generational
+-XX:ShenandoahGCHeuristics=static
 -XX:ShenandoahPacingMaxDelay=1
 
 -XX:ShenandoahMinYoungPercentage=1
 -XX:ShenandoahMinFreeThreshold=2
 -XX:ShenandoahMaxYoungPercentage=100
+-XX:-ShenandoahGenerationalAdaptiveTenuring
+-XX:ShenandoahGenerationalMinTenuringAge=2
+-XX:ShenandoahGenerationalMaxTenuringAge=2
 
 -XX:ShenandoahMinRegionSize=8M
 -XX:ShenandoahGarbageThreshold=20
