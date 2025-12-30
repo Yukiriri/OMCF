@@ -15,9 +15,7 @@
 
 -XX:G1NewSizePercent=1
 -XX:G1MaxNewSizePercent=100
--XX:G1ReservePercent=10
--XX:G1HeapWastePercent=1
--XX:+AlwaysTenure
+-XX:MaxTenuringThreshold=1
 
 -XX:G1HeapRegionSize=8M
 -XX:-G1UseAdaptiveIHOP
