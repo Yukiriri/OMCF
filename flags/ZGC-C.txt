@@ -8,8 +8,8 @@
 -XX:MaxDirectMemorySize=1024G
 
 -XX:+UseZGC
--XX:-ZProactive
 -XX:+ZGenerational
+-XX:-ZProactive
 
 -XX:ZYoungCompactionLimit=20
 -XX:ZFragmentationLimit=20
