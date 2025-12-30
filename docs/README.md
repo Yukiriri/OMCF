@@ -11,14 +11,14 @@
 [SGC.txt]: ../flags/SGC.txt
 [SGC-C.txt]: ../flags/SGC-C.txt
 
-| JVM参数      | 调校目标            | JDK要求 | 适用场景                   |
-| :----------- | :------------------ | :------ | :------------------------- |
-| [G1GC.txt]   | 轻度STW均衡GC       | JDK8+   | 服务端 & 客户端            |
-| [G1GC-C.txt] | 轻度STW低内存利用GC | JDK8+   | 客户端                     |
-| [ZGC.txt]    | 无感STW高内存利用GC | JDK21+  | 服务端 & 客户端 & Velocity |
-| [ZGC-C.txt]  | 无感STW中内存利用GC | JDK21+  | 客户端                     |
-| [SGC.txt]    | 无感STW中内存利用GC | JDK24+  | 服务端 & 客户端 & Velocity |
-| [SGC-C.txt]  | 无感STW低内存利用GC | JDK24+  | 客户端                     |
+| JVM参数      | 运行表现                  | JDK要求 | 适用场景                   |
+| :----------- | :------------------------ | :------ | :------------------------- |
+| [G1GC.txt]   | 轻度STW均衡GC             | JDK8+   | 服务端 & 客户端            |
+| [G1GC-C.txt] | 轻度STW低内存利用GC       | JDK8+   | 客户端                     |
+| [ZGC.txt]    | 无感STW高内存利用GC       | JDK21+  | 服务端 & 客户端 & Velocity |
+| [ZGC-C.txt]  | 无感STW中内存利用GC       | JDK21+  | 客户端                     |
+| [SGC.txt]    | 大部分无感STW高内存利用GC | JDK24+  | 服务端 & 客户端 & Velocity |
+| [SGC-C.txt]  | 大部分无感STW低内存利用GC | JDK24+  | 客户端                     |
 
 - ## 运行效果
   - [服务端运行统计](./statistical/server/server.md)
