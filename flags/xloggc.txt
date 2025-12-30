@@ -1,12 +1,16 @@
--Xlog:gc:file="logs/gc.log":time:filecount=1
--Xlog:gc=debug:file="logs/gc-[debug].log":time:filecount=1
--Xlog:gc+init*=debug:file="logs/gc+init-[debug].log":time:filecount=1
+-Xlog:gc:file="logs/xlog-gc.log":time:filecount=1
+-Xlog:gc=debug:file="logs/xlog-gc-[debug].log":time:filecount=1
+-Xlog:gc+init*=debug:file="logs/xlog-gc+init-[debug].log":time:filecount=1
+-Xlog:gc+stats*=debug:file="logs/xlog-gc+stats-[debug].log":time:filecount=1
 
--Xlog:gc+ergo*=debug:file="logs/gc+ergo-[debug].log":time:filecount=1
--Xlog:gc+heap*=debug:file="logs/gc+heap-[debug].log":time:filecount=1
--Xlog:gc+task*=debug:file="logs/gc+task-[debug].log":time:filecount=1
--Xlog:gc+phases*=debug:file="logs/gc+phases-[debug].log":time:filecount=1
--Xlog:gc+director*=debug:file="logs/gc+director-[debug].log":time:filecount=1
+-Xlog:gc+heap*=debug:file="logs/xlog-gc+heap-[debug].log":time:filecount=1
+-Xlog:gc+ergo*=debug:file="logs/xlog-gc+ergo-[debug].log":time:filecount=1
+-Xlog:gc+phases*=debug:file="logs/xlog-gc+phases-[debug].log":time:filecount=1
+-Xlog:gc+marking*=debug:file="logs/xlog-gc+marking-[debug].log":time:filecount=1
 
-#-Xlog:gc+metaspace:file="logs/gc+metaspace.log":time:filecount=1
--Xlog:codecache*:file="logs/codecache.log":time:filecount=1
+-Xlog:gc+task*=debug:file="logs/xlog-gc+task-[debug].log":time:filecount=1
+-Xlog:gc+mmu*=debug:file="logs/xlog-gc+mmu-[debug].log":time:filecount=1
+-Xlog:gc+director*=debug:file="logs/xlog-gc+director-[debug].log":time:filecount=1
+
+-Xlog:gc+metaspace:file="logs/xlog-gc+metaspace.log":time:filecount=1
+-Xlog:codecache*:file="logs/xlog-codecache.log":time:filecount=1
