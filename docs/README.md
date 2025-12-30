@@ -15,7 +15,7 @@
 | :----------- | :------------------ | :------ | :------------------------- |
 | [G1GC.txt]   | 轻度STW均衡GC       | JDK8+   | 服务端 & 客户端            |
 | [G1GC-C.txt] | 轻度STW低内存利用GC | JDK8+   | 客户端                     |
-| [ZGC.txt]    | 无感STW高内存利用GC | JDK17+  | 服务端 & 客户端 & Velocity |
+| [ZGC.txt]    | 无感STW高内存利用GC | JDK21+  | 服务端 & 客户端 & Velocity |
 | [ZGC-C.txt]  | 无感STW中内存利用GC | JDK21+  | 客户端                     |
 | [SGC.txt]    | 无感STW中内存利用GC | JDK24+  | 服务端 & 客户端 & Velocity |
 | [SGC-C.txt]  | 无感STW低内存利用GC | JDK24+  | 客户端                     |
@@ -27,8 +27,8 @@
   |              | 客户端                           | 服务端                       |
   | :----------- | :------------------------------- | :--------------------------- |
   | 少核心低内存 | 优选[G1GC-C.txt] 备选[G1GC.txt]  | [G1GC.txt]                   |
-  | 多核心低内存 | 优选[SGC-C.txt] 备选[G1GC-C.txt] | 优选[ZGC.txt] 备选[G1GC.txt] |
   | 少核心高内存 | 优选[G1GC-C.txt] 备选[ZGC-C.txt] | 优选[G1GC.txt] 备选[ZGC.txt] |
+  | 多核心低内存 | 优选[SGC-C.txt] 备选[G1GC-C.txt] | 优选[ZGC.txt] 备选[G1GC.txt] |
   | 多核心高内存 | [ZGC-C.txt]                      | [ZGC.txt]                    |
 
 > [!TIP]  
