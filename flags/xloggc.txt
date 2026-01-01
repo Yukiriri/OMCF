@@ -5,6 +5,7 @@
 
 -Xlog:gc+heap*=debug:file="logs/xlog-gc+heap-[debug].log":time:filecount=1
 -Xlog:gc+ergo*=debug:file="logs/xlog-gc+ergo-[debug].log":time:filecount=1
+-Xlog:gc+age*=debug:file="logs/xlog-gc+age-[debug].log":time:filecount=1
 -Xlog:gc+phases*=debug:file="logs/xlog-gc+phases-[debug].log":time:filecount=1
 -Xlog:gc+marking*=debug:file="logs/xlog-gc+marking-[debug].log":time:filecount=1
 
