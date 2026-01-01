@@ -10,7 +10,7 @@
 -XX:+UseShenandoahGC
 -XX:ShenandoahGCMode=generational
 -XX:ShenandoahGCHeuristics=static
--XX:ShenandoahPacingMaxDelay=1
+-XX:ShenandoahPacingMaxDelay=8
 
 -XX:ShenandoahMinYoungPercentage=1
 -XX:ShenandoahMinFreeThreshold=2
@@ -20,5 +20,6 @@
 -XX:ShenandoahGenerationalMaxTenuringAge=2
 
 -XX:ShenandoahMinRegionSize=8M
+-XX:ShenandoahMaxRegionSize=8M
 -XX:ShenandoahGarbageThreshold=20
 -XX:ShenandoahOldGarbageThreshold=20
