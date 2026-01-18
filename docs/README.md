@@ -61,6 +61,7 @@
 ## JDK推荐
 - [Liberica](https://bell-sw.com/pages/downloads/)
 - [Zulu](https://www.azul.com/downloads/?package=jdk#zulu)
+- [Graalvm](https://www.graalvm.org/downloads/)
 
 > [!TIP]  
 > 推荐使用LTS版本，可以有更广范围的旧版MC兼容性  
