@@ -49,15 +49,6 @@
 > [!IMPORTANT]  
 > 写入到txt时，Windows需要注意行尾必须为LF  
 
-> [!NOTE]  
-> 你是说，怎么在启动命令行引用？  
-> 比如在`user_jvm_args.txt`里写好了JVM参数  
-> 然后启动命令就这样写  
-> ```
-> java @user_jvm_args.txt -jar server.jar
-> ```
-> @user_jvm_args.txt一定要在-jar之前  
-
 ## JDK推荐
 - [Liberica](https://bell-sw.com/pages/downloads/)
 - [Zulu](https://www.azul.com/downloads/?package=jdk#zulu)
