@@ -8,6 +8,8 @@
 [G1GC-C.txt]: ../flags/G1GC-C.txt
 [ZGC.txt]: ../flags/ZGC.txt
 [ZGC-C.txt]: ../flags/ZGC-C.txt
+[SGC.txt]: ../flags/SGC.txt
+[SGC-C.txt]: ../flags/SGC-C.txt
 
 | JVM参数      | 运行表现            | JDK要求 | 适用场景                   |
 | :----------- | :------------------ | :------ | :------------------------- |
@@ -15,9 +17,12 @@
 | [G1GC-C.txt] | 轻度STW低内存利用GC | JDK8+   | 客户端                     |
 | [ZGC.txt]    | 无感STW高内存利用GC | JDK21+  | 服务端 & 客户端 & Velocity |
 | [ZGC-C.txt]  | 无感STW中内存利用GC | JDK21+  | 客户端                     |
+| [SGC.txt]    | 无感STW高内存利用GC | JDK25+  | 服务端 & 客户端 & Velocity |
+| [SGC-C.txt]  | 无感STW低内存利用GC | JDK25+  | 客户端                     |
 
 - ## 运行效果
-  - [服务端运行统计](./statistical/server/server.md)
+  - [服务端统计](./statistical/server/server.md)
+  <!-- - [客户端统计](./statistical/client/client.md) -->
 
 - ## 选择参考
   |              | 客户端                           | 服务端                       |
@@ -60,11 +65,11 @@
 ## 经验心得
 - [内存估算](./experience/memory.md)
 
-## 学习参考
+## Credits
+- https://gemini.google.com/share/dd42b0bb06ba
 - https://chriswhocodes.com/vm-options-explorer.html
 - https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft
-- [share/gc/g1/g1ConcurrentMark.cpp](https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/g1/g1ConcurrentMark.cpp)
-- [share/gc/z/zDirector.cpp](https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/z/zDirector.cpp)
+- [jdk25/src/hotspot/share/gc/g1/g1ConcurrentMark.cpp](https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/g1/g1ConcurrentMark.cpp)
 
 ## Stargazers
 ![Stargazers](https://starchart.cc/Yukiriri/OMCF.svg?variant=adaptive)
