@@ -5,13 +5,14 @@
 
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
+-XX:ReservedCodeCacheSize=384M
 -XX:MaxDirectMemorySize=1024G
 
 -XX:+UseG1GC
 -XX:+ParallelRefProcEnabled
--XX:MaxGCPauseMillis=8
--XX:GCPauseIntervalMillis=16
--XX:G1ConcMarkStepDurationMillis=4
+-XX:MaxGCPauseMillis=12
+-XX:GCPauseIntervalMillis=13
+-XX:G1ConcMarkStepDurationMillis=6
 
 -XX:G1NewSizePercent=1
 -XX:G1MaxNewSizePercent=100
