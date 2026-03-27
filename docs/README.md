@@ -18,22 +18,22 @@
 | [ZGC.txt]    | 无感STW高内存利用GC | JDK21+  | 服务端 & 客户端 & Velocity |
 | [ZGC-C.txt]  | 无感STW中内存利用GC | JDK21+  | 客户端                     |
 | [SGC.txt]    | 无感STW高内存利用GC | JDK25+  | 服务端 & 客户端 & Velocity |
-| [SGC-C.txt]  | 无感STW低内存利用GC | JDK25+  | 客户端                     |
+| [SGC-C.txt]  | 无感STW中内存利用GC | JDK25+  | 客户端                     |
 
 - ## 运行效果
   - [服务端统计](./statistical/server/server.md)
   <!-- - [客户端统计](./statistical/client/client.md) -->
 
 - ## 选择参考
-  |              | 客户端                           | 服务端                       |
-  | :----------- | :------------------------------- | :--------------------------- |
-  | 少核心低内存 | 优选[G1GC-C.txt] 备选[G1GC.txt]  | [G1GC.txt]                   |
-  | 少核心高内存 | 优选[G1GC-C.txt] 备选[G1GC.txt]  | [G1GC.txt]                   |
-  | 多核心低内存 | 优选[ZGC-C.txt] 备选[G1GC-C.txt] | 优选[ZGC.txt] 备选[G1GC.txt] |
-  | 多核心高内存 | [ZGC-C.txt]                      | [ZGC.txt]                    |
+  |              | 客户端                        | 服务端                       |
+  | :----------- | :---------------------------- | :--------------------------- |
+  | 少核心低内存 | [G1GC.txt]                    | [G1GC.txt]                   |
+  | 少核心高内存 | 优选[ZGC.txt] 备选[G1GC.txt]  | [G1GC.txt]                   |
+  | 多核心低内存 | 优选[ZGC-C.txt] 备选[ZGC.txt] | 优选[ZGC.txt] 备选[G1GC.txt] |
+  | 多核心高内存 | [ZGC-C.txt]                   | [ZGC.txt]                    |
 
 > [!TIP]  
-> `G1GC-C` `ZGC-C`可以有节省内存的用途  
+> `G1GC-C` `ZGC-C` `SGC-C`可以有节省内存的用途  
 > 如果想节省内存占用，就把-Xms设置到比-Xmx更低  
 > 但是`G1GC-C`的-Xms不要给太小，不然反复伸缩进程内存会导致STW大幅波动  
 
