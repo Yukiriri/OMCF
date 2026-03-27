@@ -67,6 +67,7 @@
 
 ## Credits
 - https://gemini.google.com/share/dd42b0bb06ba
+- https://gemini.google.com/share/bbf9d7d4be18
 - https://chriswhocodes.com/vm-options-explorer.html
 - https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft
 - [jdk25/src/hotspot/share/gc/g1/g1ConcurrentMark.cpp](https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/g1/g1ConcurrentMark.cpp)
