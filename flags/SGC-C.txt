@@ -4,9 +4,8 @@
 -Djava.awt.headless=true
 
 -XX:+AlwaysPreTouch
--XX:+DisableExplicitGC
+-XX:+ExplicitGCInvokesConcurrent
 -XX:ReservedCodeCacheSize=384M
--XX:MaxDirectMemorySize=1024G
 
 -XX:+UseShenandoahGC
 -XX:ShenandoahGCMode=generational
@@ -27,3 +26,4 @@
 -XX:ShenandoahUncommitDelay=6000
 -XX:ShenandoahGuaranteedYoungGCInterval=1200
 -XX:ShenandoahGuaranteedOldGCInterval=30000
+-XX:MaxDirectMemorySize=128G

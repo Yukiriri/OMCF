@@ -4,9 +4,8 @@
 -Djava.awt.headless=true
 
 -XX:+AlwaysPreTouch
--XX:+DisableExplicitGC
+-XX:+ExplicitGCInvokesConcurrent
 -XX:ReservedCodeCacheSize=384M
--XX:MaxDirectMemorySize=1024G
 
 -XX:+UseG1GC
 -XX:+ParallelRefProcEnabled
@@ -29,3 +28,4 @@
 -XX:MinHeapFreeRatio=10
 -XX:MaxHeapFreeRatio=20
 -XX:G1PeriodicGCInterval=6000
+-XX:MaxDirectMemorySize=128G

@@ -4,9 +4,8 @@
 -Djava.awt.headless=true
 
 -XX:+AlwaysPreTouch
--XX:+DisableExplicitGC
+-XX:+ExplicitGCInvokesConcurrent
 -XX:ReservedCodeCacheSize=384M
--XX:MaxDirectMemorySize=1024G
 
 -XX:+UseZGC
 -XX:+ZGenerational
@@ -18,3 +17,4 @@
 -XX:ZUncommitDelay=6
 -XX:ZCollectionIntervalMinor=1.2
 -XX:ZCollectionIntervalMajor=30.0
+-XX:MaxDirectMemorySize=128G
