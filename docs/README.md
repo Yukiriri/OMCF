@@ -17,8 +17,8 @@
 | [G1GC-C.txt] | 轻度STW低内存利用GC | JDK8+   | 客户端                     |
 | [ZGC.txt]    | 无感STW高内存利用GC | JDK21+  | 服务端 & 客户端 & Velocity |
 | [ZGC-C.txt]  | 无感STW中内存利用GC | JDK21+  | 客户端                     |
-| [SGC.txt]    | 无感STW高内存利用GC | JDK25+  | 服务端 & 客户端 & Velocity |
-| [SGC-C.txt]  | 无感STW中内存利用GC | JDK25+  | 客户端                     |
+| [SGC.txt]    | 微感STW高内存利用GC | JDK25+  | 服务端 & 客户端 & Velocity |
+| [SGC-C.txt]  | 微感STW中内存利用GC | JDK25+  | 客户端                     |
 
 - ## 运行效果
   - [服务端统计](./statistical/server/server.md)
@@ -44,6 +44,8 @@
   - 写入到txt文件并在启动命令行@引用  
     (在-jar之前)  
     (需要JDK9+)  
+  - 也可以添加到`user_jvm_args.txt`  
+    (这个因服务端偏好而异)  
 - 客户端  
   - 添加到启动器自定义JVM参数  
     (需要删除启动器已有的`-XX:+UseG1GC`)  
@@ -52,7 +54,7 @@
     (需要JDK9+)  
 
 > [!IMPORTANT]  
-> 写入到txt时，Windows需要注意行尾必须为LF  
+> 在使用Windows写入到txt时，需要注意行尾必须为LF  
 
 ## JDK推荐
 - [Liberica](https://bell-sw.com/pages/downloads/)
@@ -66,11 +68,9 @@
 - [内存估算](./experience/memory.md)
 
 ## Credits
-- https://gemini.google.com/share/dd42b0bb06ba
-- https://gemini.google.com/share/bbf9d7d4be18
+- https://chat.qwen.ai/s/7944d7ec-c9c8-465e-bfb8-dc2dc404af64?fev=0.2.35
 - https://chriswhocodes.com/vm-options-explorer.html
 - https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft
-- [jdk25/src/hotspot/share/gc/g1/g1ConcurrentMark.cpp](https://github.com/openjdk/jdk/blob/jdk25/src/hotspot/share/gc/g1/g1ConcurrentMark.cpp)
 
 ## Stargazers
 ![Stargazers](https://starchart.cc/Yukiriri/OMCF.svg?variant=adaptive)
