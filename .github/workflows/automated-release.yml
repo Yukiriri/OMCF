@@ -1,0 +1,38 @@
+name: Automated Release
+
+on:
+  push:
+    paths:
+      - '/docs/statistical/**'
+      - '/flags/**'
+  pull_request:
+    paths:
+      - '/docs/statistical/**'
+      - '/flags/**'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate Version
+        id: generate
+        run: |
+          $date = Get-Date -Format 'yyyy.MM.dd'
+          $build_num = $env:GITHUB_RUN_NUMBER -as [int]
+          $build_num = $build_num % 100
+          $build_num = '{0:D2}' -f $build_num
+          $build_ver = "$date.$build_num"
+          echo "release_ver=$build_ver" >> $env:GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          name: "${{ steps.generate.outputs.release_ver }}"
+          tag: "${{ steps.generate.outputs.release_ver }}"
+          artifacts: "/docs/statistical/**,./flags/**"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
