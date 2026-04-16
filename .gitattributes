@@ -1,0 +1,7 @@
+* text=auto
+
+.gitattributes  text eol=lf
+.gitignore      text eol=lf
+**.md           text eol=lf
+
+flags/**        text eol=lf
