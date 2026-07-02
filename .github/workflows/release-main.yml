@@ -28,33 +28,41 @@ jobs:
         id: generate
         shell: pwsh
         run: |
+          $repo_url = "$env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY"
+          echo "repo_url=$repo_url" >> $env:GITHUB_OUTPUT
+
           $date = Get-Date -Format 'yyyy.MM.dd'
           $build_num = $env:GITHUB_RUN_NUMBER -as [int]
           $build_num = $build_num % 100
-          $build_ver = "$date.$build_num"
-          Write-Output build_ver=$build_ver
-          echo "release_ver=$build_ver" >> $env:GITHUB_OUTPUT
+          $bin_fourver = "$date.$build_num"
+          $release_semver = "$date-$build_num"
+          Write-Output bin_fourver=$bin_fourver
+          Write-Output release_semver=$release_semver
+          echo "release_semver=$release_semver" >> $env:GITHUB_OUTPUT
 
           [Console]::InputEncoding = [System.Text.Encoding]::UTF8
           [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
           $previous_tag = $(git describe --tags --abbrev=0 HEAD^ 2>$null)
-          if ($previous_tag -ne '') {
+          if ($previous_tag -ne $null -and $previous_tag -ne '') {
             $previous_tag += '..HEAD'
           }
-          $release_body = $(git log "$previous_tag" --pretty=format:"- [`%h`]($env:GITHUB_SERVER_URL/$env:GITHUB_REPOSITORY/commit/%H): %s")
+          $release_body = $(git log "$previous_tag" --pretty=format:"- [`%h`]($repo_url/commit/%H): %s")
           Write-Output previous_tag=$previous_tag
           Write-Output release_body=$release_body
           echo $release_body > CHANGELOG.txt
 
+      - name: Zip Statistical
+        run: 7z a statistical.zip -r ./docs/statistical/
+
       - name: Create Release
         uses: softprops/action-gh-release@v3
         with:
-          tag_name: ${{ steps.generate.outputs.release_ver }}
-          name: ${{ steps.generate.outputs.release_ver }}
+          tag_name: ${{ steps.generate.outputs.release_semver }}
+          name: ${{ steps.generate.outputs.release_semver }}
           body_path: CHANGELOG.txt
           files: |
-            docs/statistical/*.md
             flags/*.txt
+            statistical.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
