@@ -43,9 +43,9 @@
     | 多核心 大内存 | [ZGC.txt]                    | [ZGC-C.txt]                    |
 
 > [!TIP]  
-> `G1GC-C` `G1GCM-C` `ZGC-C` `SGC-C`可以有节省内存的用途  
+> `G1GC-C` `ZGC-C` `SGC-C`可以有节省内存的用途  
 > 如果想节省内存占用，就把-Xms设置到比-Xmx更低  
-> 但是`G1GC-C` `G1GCM-C`的-Xms不要给太小，不然反复伸缩进程内存会导致STW大幅波动  
+> 但是`G1GC-C`的-Xms不要给太小，不然反复伸缩进程内存会导致STW大幅波动  
 
 ## 使用方式
 - ## 服务端  
@@ -83,5 +83,5 @@
 ## Acknowledgements
 - https://chriswhocodes.com/vm-options-explorer.html
 
-## Stargazers
+## Star History
 [![Star History Chart](https://api.star-history.com/chart?repos=Yukiriri/OMCF&type=date&legend=top-left)](https://www.star-history.com/?repos=Yukiriri%2FOMCF&type=date&legend=bottom-right)
