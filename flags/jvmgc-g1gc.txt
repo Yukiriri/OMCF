@@ -1,7 +1,6 @@
 -XX:+IgnoreUnrecognizedVMOptions
 -XX:+UnlockExperimentalVMOptions
 -Dfile.encoding=UTF-8
--Djava.awt.headless=true
 
 -XX:+AlwaysPreTouch
 -XX:+ExplicitGCInvokesConcurrent
@@ -20,14 +19,10 @@
 -XX:SurvivorRatio=50
 -XX:MaxTenuringThreshold=1
 
--XX:G1HeapRegionSize=16M
+-XX:G1HeapRegionSize=32M
 -XX:-G1UseAdaptiveIHOP
--XX:InitiatingHeapOccupancyPercent=16
--XX:G1MixedGCCountTarget=3
--XX:G1OldCSetRegionThresholdPercent=8
+-XX:InitiatingHeapOccupancyPercent=66
+-XX:G1MixedGCCountTarget=6
+-XX:G1OldCSetRegionThresholdPercent=10
 
 -XX:G1ExpandByPercentOfAvailable=0
--XX:MinHeapFreeRatio=16
--XX:MaxHeapFreeRatio=33
--XX:G1PeriodicGCInterval=6000
--XX:MaxDirectMemorySize=128G
